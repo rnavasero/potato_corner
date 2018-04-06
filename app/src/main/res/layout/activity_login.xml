@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/login_frame"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.constraint.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_gradient_yellow_blue"
+        tools:context="com.mycart.advance.activities.LoginActivity"
+        android:paddingTop="30dp">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="380dp"
+            android:layout_height="120dp"
+            android:layout_marginEnd="142dp"
+            android:layout_marginStart="142dp"
+            android:layout_marginTop="52dp"
+            android:contentDescription="@null"
+            android:src="@drawable/pclogonew"
+            android:elevation="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+            android:id="@+id/spinner"
+            style="@style/EditTextStyle"
+            android:layout_width="285dp"
+            android:layout_height="wrap_content"
+            android:hint="Select Store Branch"
+            tools:layout_editor_absoluteX="55dp"
+            tools:layout_editor_absoluteY="202dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView"/>
+
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/input_login_username"
+            style="@style/EditTextStyle"
+            android:layout_width="300dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/spinner"
+            app:layout_constraintStart_toStartOf="@+id/spinner"
+            app:layout_constraintTop_toBottomOf="@+id/spinner"
+            tools:ignore="UnknownId">
+
+            <EditText
+                android:id="@+id/et_login_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/username"
+                android:shadowColor="@color/white"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_16" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/input_login_password"
+            style="@style/EditTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintEnd_toEndOf="@+id/input_login_username"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/input_login_username"
+            app:layout_constraintTop_toBottomOf="@+id/input_login_username"
+            app:passwordToggleEnabled="true">
+
+            <EditText
+                android:shadowColor="@color/white"
+                android:id="@+id/et_login_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/password"
+                android:imeOptions="actionDone"
+                android:inputType="textPassword"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_16" />
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="280dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/rounded_button_green"
+            android:elevation="10dp"
+            android:gravity="center"
+            android:shadowColor="@color/white"
+            android:text="L O g i n"
+            android:textColor="#FFFF00"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/input_login_password"
+            app:layout_constraintHorizontal_bias="0.494"
+            app:layout_constraintStart_toStartOf="@+id/input_login_password"
+            app:layout_constraintTop_toBottomOf="@+id/input_login_password" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="350dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="50dp"
+            android:elevation="4dp"
+            android:tint="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_login"
+            app:layout_constraintVertical_bias="0.866"
+            app:srcCompat="@drawable/pclogo"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="30dp" />
+
+
+    </android.support.constraint.ConstraintLayout>
+</FrameLayout>
+
+

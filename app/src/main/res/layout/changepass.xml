@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/changepass"
+    android:layout_gravity="center"
+    android:background="@drawable/bg_gradient_yellow_blue2"
+    android:layout_width="wrap_content"
+    android:layout_height="400dp">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
+            android:padding="15dp"
+            android:gravity="center"
+            android:id="@+id/textView4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_button_yellow2"
+            android:text="CHANGE PASSWORD"
+            android:textColor="@color/green"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/input_current_password"
+            style="@style/EditTextStyle"
+            android:layout_width="300dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="33dp"
+            app:passwordToggleEnabled="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView4"
+            tools:ignore="UnknownId">
+
+            <EditText
+                android:id="@+id/et_current_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter Current Password"
+                android:imeOptions="actionDone"
+                android:inputType="textPassword"
+                android:shadowColor="@color/white"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_16" />
+        </android.support.design.widget.TextInputLayout>
+
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/input_new_password"
+            style="@style/EditTextStyle"
+            android:layout_width="300dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:passwordToggleEnabled="true"
+            app:layout_constraintEnd_toEndOf="@+id/input_current_password"
+            app:layout_constraintStart_toStartOf="@+id/input_current_password"
+            app:layout_constraintTop_toBottomOf="@+id/input_current_password"
+            tools:ignore="UnknownId">
+
+            <EditText
+                android:id="@+id/et_new_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter New Password"
+                android:imeOptions="actionDone"
+                android:inputType="textPassword"
+                android:shadowColor="@color/white"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_16" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/input_cnew_password"
+            style="@style/EditTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintEnd_toEndOf="@+id/input_new_password"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/input_new_password"
+            app:layout_constraintTop_toBottomOf="@+id/input_new_password"
+            app:passwordToggleEnabled="true">
+
+            <EditText
+                android:shadowColor="@color/white"
+                android:id="@+id/et_cnew_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Confirm New Password"
+                android:imeOptions="actionDone"
+                android:inputType="textPassword"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_16" />
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:id="@+id/btn_confirm"
+            android:layout_width="230dp"
+            android:layout_height="45dp"
+            android:layout_marginBottom="26dp"
+            android:layout_marginTop="48dp"
+            android:background="@drawable/rounded_button_green"
+            android:elevation="5dp"
+            android:gravity="center"
+            android:shadowColor="@color/white"
+            android:text="CONFIRM"
+            android:textColor="#FFFF00"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/input_cnew_password"
+            app:layout_constraintHorizontal_bias="0.494"
+            app:layout_constraintStart_toStartOf="@+id/input_cnew_password"
+            app:layout_constraintTop_toBottomOf="@+id/input_cnew_password" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</FrameLayout>
