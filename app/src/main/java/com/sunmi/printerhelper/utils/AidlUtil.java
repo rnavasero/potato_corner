@@ -9,7 +9,6 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.IBinder;
 import android.os.RemoteException;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.sunmi.printerhelper.R;
@@ -261,7 +260,7 @@ public class AidlUtil {
         try {
             woyouService.setAlignment(1, null);
             woyouService.printBitmap(bitmap, null);
-            woyouService.lineWrap(0, null);
+            woyouService.lineWrap(3, null);
         } catch (RemoteException e) {
             e.printStackTrace();
         }

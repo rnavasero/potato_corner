@@ -16,7 +16,10 @@ import com.example.codemagnus.newproject.Adapters.CheckOutRecyclerAdapter
 import com.mycart.advance.https.API
 import com.mycart.advance.https.APIRequest
 import com.sunmi.Activities.MainActivity
+import com.sunmi.Fragments.FragmentReceipt
 import com.sunmi.printerhelper.R
+import com.sunmi.printerhelper.R.id.btn_checkout
+import com.sunmi.printerhelper.R.id.tv_checkout_total_price
 import com.sunmi.printerhelper.utils.AidlUtil
 import kotlinx.android.synthetic.main.dialog_confirm_checkout.view.*
 import kotlinx.android.synthetic.main.fragment_check_out.*
@@ -78,27 +81,8 @@ class CheckOutFragment: Fragment() {
 
                 val dialog = alert.create()
                 v.btn_check_now.setOnClickListener{
-                    try {
-                        val inflatedFrame = layoutInflater.inflate(R.layout.category_content2, null)
-                        val frameLayout = inflatedFrame.findViewById<View>(R.id.frame_category) as FrameLayout
-                        frameLayout.isDrawingCacheEnabled = true
-                        frameLayout.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
-                                View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED))
-                        frameLayout.layout(0, 0, frameLayout.measuredWidth, frameLayout.measuredHeight)
-                        frameLayout.buildDrawingCache(true)
-                        val bm = frameLayout.drawingCache
-
-                        bitmap = bm
-
-                        AidlUtil.getInstance().printBitmap(bitmap)
-                        AidlUtil.getInstance().print3Line()
-                        //postCheckOut()
+                        mActivity!!.newFragment(FragmentReceipt(),FragmentReceipt.TAG)
                         dialog.dismiss()
-                    }catch (e:Exception){
-                        e.printStackTrace()
-                    }
-
-
 
                 }
 

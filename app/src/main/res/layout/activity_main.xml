@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_gradient_yellow_blue">
+    android:background="@drawable/bg_gradient_yellow_blue"
+    tools:context="com.example.codemagnus.pc.MainActivity">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
