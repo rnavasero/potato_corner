@@ -4,8 +4,12 @@ package com.sunmi.Activities
  * Created by codemagnus on 4/5/18.
  */
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.ProgressDialog
+import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -325,5 +329,15 @@ class MainActivity : AppCompatActivity() {
         finish()
     }
 
+    fun isNetworkAvailable(c: Activity):Boolean{
+        val state: Boolean
+        val cmg = c
+                .getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val activeNetworkInfo = cmg.activeNetworkInfo
+        state = activeNetworkInfo != null && activeNetworkInfo.isConnected
+
+        return state
+
+    }
 
 }
