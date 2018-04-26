@@ -1,11 +1,14 @@
 package com.example.codemagnus.newproject.Fragments
 
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.sunmi.Activities.MainActivity
+import com.sunmi.Fragments.FragmentReceipt
 import com.sunmi.printerhelper.R
 
 
@@ -14,16 +17,12 @@ import com.sunmi.printerhelper.R
  */
 
 class SuccessFragment: Fragment() {
-    var response = ""
+    var bm:Bitmap? = null
+    private var mActivity: MainActivity? = null
 
     companion object {
         val TAG: String = SuccessFragment::class.java.simpleName
-    }
-
-    fun newInstance(result: String): Fragment {
-        val fragment = SuccessFragment()
-        fragment.response = result
-        return fragment
+        var instance:SuccessFragment? = SuccessFragment()
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -32,6 +31,12 @@ class SuccessFragment: Fragment() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.i(TAG, "result: $response")
+        instance = this
+        mActivity?.setToolbar(false, "Success")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        instance = null
     }
 }

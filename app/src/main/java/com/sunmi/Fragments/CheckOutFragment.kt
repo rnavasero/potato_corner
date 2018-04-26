@@ -121,7 +121,7 @@ class CheckOutFragment: Fragment() {
                     Log.i(TAG, "checkout: $response")
                     val json = JSONObject(response)
                     if (json.getBoolean("success")){
-                        mActivity?.newFragment(SuccessFragment().newInstance(response), SuccessFragment.TAG)
+                        mActivity?.newFragment(SuccessFragment(), SuccessFragment.TAG)
                     }
                 }
 

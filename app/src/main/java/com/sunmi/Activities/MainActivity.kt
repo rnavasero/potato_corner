@@ -166,7 +166,7 @@ class MainActivity : AppCompatActivity() {
                             v.input_cnew_password.error = "Password mismatch!"
                         }
 
-
+0
                         val params:MutableMap<String, String> = HashMap()
                         params["currentPassword"] = cp
                         params["newPassword"] = np

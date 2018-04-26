@@ -12,14 +12,12 @@ import android.text.TextUtils
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import com.android.volley.VolleyError
-
 import com.example.codemagnus.newproject.Session.Session
 import com.mycart.advance.https.API
 import com.mycart.advance.https.APIRequest
 import com.mycart.advance.https.APIRequest.post
 import com.sunmi.printerhelper.R
 import kotlinx.android.synthetic.main.activity_login.*
-
 
 /**
  * Created by codemagnus on 3/19/18.
@@ -47,6 +45,42 @@ class LoginActivity:AppCompatActivity() {
                 postLogin()
             }
         }
+
+//        btn_delete_user.setOnClickListener {
+//
+//        val alert = AlertDialog.Builder(this    )
+//        val v = LayoutInflater.from(this).inflate(R.layout.layout_delete_user, null)
+//        alert.setView(v)
+//        val dialog = alert.create()
+//
+//        v.btn_confirmDelete.setOnClickListener{
+//            val du = v.et_deleteuserID.text.toString()
+//
+//
+//            if (v.et_deleteuserID.text.toString().isEmpty()){
+//                v.inputDeleteUse.error = "This field is required"
+//                return@setOnClickListener
+//            }
+//
+//            val params:MutableMap<String, String> = java.util.HashMap()
+//            params["id"] = du
+//            APIRequest.deleteUSER(this, API.DELETEUSER, du, object : APIRequest.URLCallback{
+//                override fun didUrlResponse(response: String) {
+//                    dialog.dismiss()
+//                }
+//
+//                override fun didUrlError(error: VolleyError) {
+//
+//                }
+//
+//            })
+//
+//
+//        }
+//            dialog.show()
+//        }
+
+
 
     }
 

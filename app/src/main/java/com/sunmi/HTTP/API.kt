@@ -11,4 +11,5 @@ object API {
     const val PRODUCTS              = "$BASE_URL/product"
     const val CHECKOUT              = "$BASE_URL/cart/checkout"
     const val CHANGEPASS            = "$BASE_URL/user/change_password"
+    const val DELETEUSER            = "$BASE_URL/user/"
 }

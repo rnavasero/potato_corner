@@ -76,8 +76,6 @@ object APIRequest {
             urlCallback.didUrlError(error)
             pDialog.dismiss()
 
-
-            val err = String(error.networkResponse.data, Charset.forName("UTF-8"))
             Toast.makeText(context, "Invalid Current Password", Toast.LENGTH_SHORT).show()
 
         }){
@@ -90,6 +88,38 @@ object APIRequest {
             override fun getParams(): MutableMap<String, String> {
                 return params
             }
+        }
+        queue.add(request)
+    }
+
+    fun deleteUSER(context: Context, url:String, du:String, urlCallback: URLCallback){
+
+        val pDialog: ProgressDialog = ProgressDialog(context).apply {
+            setMessage("Please wait...")
+            setCancelable(false)
+            setCanceledOnTouchOutside(false)
+        }
+
+        pDialog.show()
+
+        val queue =  Volley.newRequestQueue(context)
+        val request = object : StringRequest(Request.Method.DELETE, url+du, Response.Listener { response ->
+            pDialog.dismiss()
+            urlCallback.didUrlResponse(response)
+            Toast.makeText(context,"USER DELETED", Toast.LENGTH_LONG).show()
+        }, Response.ErrorListener {error ->
+            urlCallback.didUrlError(error)
+            pDialog.dismiss()
+
+            Toast.makeText(context, "Invalid Parameter", Toast.LENGTH_SHORT).show()
+
+        }){
+            override fun getHeaders(): MutableMap<String, String> {
+                val token:MutableMap<String, String> = HashMap()
+                token["x-access-token"] = Session(context).getToken()
+                return token
+            }
+
         }
         queue.add(request)
     }
