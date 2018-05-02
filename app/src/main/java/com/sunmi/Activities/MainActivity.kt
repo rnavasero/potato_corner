@@ -224,19 +224,14 @@ class MainActivity : AppCompatActivity() {
 //
         val f = supportFragmentManager.findFragmentById(R.id.main_frame)
         if (f is SuccessFragment) {
-            removeFragment(SuccessFragment())
-            f.onBackPressed()
-
+            if(fm!!.backStackEntryCount == 2) {
+                fm!!.beginTransaction().remove(SuccessFragment()).commitAllowingStateLoss()
+            }
+            else if(fm!!.backStackEntryCount >2){
+                fm!!.beginTransaction().remove(SuccessFragment()).commitAllowingStateLoss()
+                super.onBackPressed()
+            }
         }
-
-//        if (doubleBacktoExitPressedOnce) {
-//            super.onBackPressed()
-//            return
-//        }
-//
-//        doubleBacktoExitPressedOnce = true
-//
-//        Handler().postDelayed({ doubleBacktoExitPressedOnce = false }, 2000)
 
         if(fm!!.backStackEntryCount == 2)
         {

@@ -82,9 +82,9 @@ class CheckOutFragment: Fragment() {
                 v.btn_check_now.setOnClickListener{
                     mActivity!!.newFragment(FragmentReceipt(),FragmentReceipt.TAG)
                     postCheckOut()
-                    Handler().postDelayed({
-                        mActivity!!.newFragment(SuccessFragment(),SuccessFragment.TAG)
-                    }, 1000)
+//                    Handler().postDelayed({
+//                        mActivity!!.newFragment(SuccessFragment(),SuccessFragment.TAG)
+//                    }, 1000)
 
                     dialog.dismiss()
                     mActivity!!.removeFragment(FragmentReceipt())
@@ -127,11 +127,15 @@ class CheckOutFragment: Fragment() {
                     val json = JSONObject(response)
                     if (json.getBoolean("success")){
                         Toast.makeText(context,"Transaction Successfully Submitted!",Toast.LENGTH_SHORT).show()
+                        mActivity?.cart = mutableListOf()
+                        mActivity?.setCartCount(0)
+                        mActivity!!.newFragment(SuccessFragment(),SuccessFragment.TAG)
                     }
                 }
 
                 override fun didUrlError(error: VolleyError) {
-                    mActivity?.showRequestError(error)
+                    Toast.makeText(context,error.toString(),Toast.LENGTH_LONG).show()
+                    //mActivity?.showRequestError(error)
                 }
 
             })
