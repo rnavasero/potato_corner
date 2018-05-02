@@ -32,8 +32,6 @@ class LoginActivity:AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        var arrayAdapter = ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, storeName)
-        spinner.setAdapter(arrayAdapter)
 
         session = Session(this)
         if (session?.isUserLogin()!!){

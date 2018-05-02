@@ -82,14 +82,14 @@ class SizeSelectionFragment: Fragment() {
 
     }
 
-    override fun onDetach() {
-        super.onDetach()
-
-        if (this.isRemoving) {
-            val fm = fragmentManager
-            fm.beginTransaction().remove(SizeSelectionFragment()).commit()
-        }
-    }
+//    override fun onDetach() {
+//        super.onDetach()
+//
+//        if (this.isRemoving) {
+//            val fm = fragmentManager
+//            fm.beginTransaction().remove(SizeSelectionFragment()).commit()
+//        }
+//    }
 
     override fun onDestroy() {
         super.onDestroy()

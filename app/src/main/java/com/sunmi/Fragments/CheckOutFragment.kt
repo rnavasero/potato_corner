@@ -2,6 +2,7 @@ package com.example.codemagnus.newproject.Fragments
 
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.os.Handler
 import android.support.v4.app.Fragment
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.LinearLayoutManager
@@ -9,17 +10,15 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
 import android.widget.Toast
 import com.android.volley.VolleyError
 import com.example.codemagnus.newproject.Adapters.CheckOutRecyclerAdapter
+import com.example.codemagnus.newproject.Session.Session
 import com.mycart.advance.https.API
 import com.mycart.advance.https.APIRequest
 import com.sunmi.Activities.MainActivity
 import com.sunmi.Fragments.FragmentReceipt
 import com.sunmi.printerhelper.R
-import com.sunmi.printerhelper.R.id.btn_checkout
-import com.sunmi.printerhelper.R.id.tv_checkout_total_price
 import com.sunmi.printerhelper.utils.AidlUtil
 import kotlinx.android.synthetic.main.dialog_confirm_checkout.view.*
 import kotlinx.android.synthetic.main.fragment_check_out.*
@@ -81,11 +80,17 @@ class CheckOutFragment: Fragment() {
 
                 val dialog = alert.create()
                 v.btn_check_now.setOnClickListener{
-                        mActivity!!.newFragment(FragmentReceipt(),FragmentReceipt.TAG)
-                        dialog.dismiss()
+                    mActivity!!.newFragment(FragmentReceipt(),FragmentReceipt.TAG)
+                    postCheckOut()
+                    Handler().postDelayed({
+                        mActivity!!.newFragment(SuccessFragment(),SuccessFragment.TAG)
+                    }, 1000)
+
+                    dialog.dismiss()
+                    mActivity!!.removeFragment(FragmentReceipt())
+
 
                 }
-
                 dialog.show()
             }
         }
@@ -113,15 +118,15 @@ class CheckOutFragment: Fragment() {
             map["data"] = jsonObj.toString()
             map["id"]   = mActivity?.session?.user()?.id.toString()
 
-            val mapHedear:HashMap<String, String> = HashMap()
-            mapHedear["x-access-token"] = mActivity?.session?.user()!!.token
+            val mapHeader:HashMap<String, String> = HashMap()
+            mapHeader["x-access-token"] = Session(context).getToken()
 
-            APIRequest.postWithToken(context, API.CHECKOUT, mapHedear, map, object : APIRequest.URLCallback{
+            APIRequest.postWithToken(context, API.CHECKOUT, mapHeader, map, object : APIRequest.URLCallback{
                 override fun didUrlResponse(response: String) {
                     Log.i(TAG, "checkout: $response")
                     val json = JSONObject(response)
                     if (json.getBoolean("success")){
-                        mActivity?.newFragment(SuccessFragment(), SuccessFragment.TAG)
+                        Toast.makeText(context,"Transaction Successfully Submitted!",Toast.LENGTH_SHORT).show()
                     }
                 }
 

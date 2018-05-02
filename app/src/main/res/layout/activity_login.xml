@@ -29,29 +29,17 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed" />
 
-        <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
-            android:id="@+id/spinner"
-            style="@style/EditTextStyle"
-            android:layout_width="285dp"
-            android:layout_height="wrap_content"
-            android:hint="Select Store Branch"
-            tools:layout_editor_absoluteX="55dp"
-            tools:layout_editor_absoluteY="202dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView"/>
-
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/input_login_username"
             style="@style/EditTextStyle"
             android:layout_width="300dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="@+id/spinner"
-            app:layout_constraintStart_toStartOf="@+id/spinner"
-            app:layout_constraintTop_toBottomOf="@+id/spinner"
+            android:layout_marginEnd="42dp"
+            android:layout_marginStart="42dp"
+            android:layout_marginTop="81dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView"
             tools:ignore="UnknownId">
 
             <EditText
@@ -110,15 +98,18 @@
             android:id="@+id/imageView2"
             android:layout_width="350dp"
             android:layout_height="30dp"
+            android:layout_marginEnd="17dp"
+            android:layout_marginStart="17dp"
             android:layout_marginTop="50dp"
             android:elevation="4dp"
             android:tint="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btn_login"
-            app:layout_constraintVertical_bias="0.866"
+            app:layout_constraintVertical_bias="0.777"
             app:srcCompat="@drawable/pclogo"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="30dp" />
+            tools:ignore="MissingConstraints" />
 
 
     </android.support.constraint.ConstraintLayout>

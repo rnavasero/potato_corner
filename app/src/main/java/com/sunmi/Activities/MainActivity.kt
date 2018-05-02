@@ -12,6 +12,7 @@ import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.content.ContextCompat.startActivity
@@ -19,6 +20,7 @@ import android.support.v7.app.AlertDialog
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.PopupMenu
 import android.support.v7.widget.Toolbar
+import android.text.TextUtils.replace
 import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -40,6 +42,7 @@ import com.example.codemagnus.newproject.Session.Session
 import com.mycart.advance.https.API
 import com.mycart.advance.https.APIRequest
 import com.mycart.advance.https.APIRequest.changePass
+import com.sunmi.Fragments.FragmentReceipt
 import com.sunmi.printerhelper.R
 import com.sunmi.printerhelper.utils.AidlUtil
 import kotlinx.android.synthetic.main.activity_login.*
@@ -59,7 +62,7 @@ class MainActivity : AppCompatActivity() {
 
     var menu: View? = null
     var cartmenu: View? = null
-    var cart: MutableList<Product> = ArrayList()
+    var cart: MutableList<Product> = mutableListOf()
     private var cartView: View? = null
     var fm: FragmentManager? = null
     var session: Session? = null
@@ -69,9 +72,8 @@ class MainActivity : AppCompatActivity() {
     var sData:MutableList<Product> = mutableListOf()
     var sData2:MutableList<Product> = mutableListOf()
     var sData3:MutableList<Product> = mutableListOf()
-    var currentPass = ""
-    var newPass = ""
-    var cnewPass = ""
+    var doubleBacktoExitPressedOnce = false
+
 
     private var isAidl: Boolean = false
 
@@ -82,6 +84,7 @@ class MainActivity : AppCompatActivity() {
     fun setAidl(aidl: Boolean) {
         isAidl = aidl
     }
+
 
 
     @SuppressLint("InflateParams")
@@ -218,11 +221,36 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
+//
+        val f = supportFragmentManager.findFragmentById(R.id.main_frame)
+        if (f is SuccessFragment) {
+            removeFragment(SuccessFragment())
+            f.onBackPressed()
 
-        if(fm?.backStackEntryCount == 2)
+        }
+
+//        if (doubleBacktoExitPressedOnce) {
+//            super.onBackPressed()
+//            return
+//        }
+//
+//        doubleBacktoExitPressedOnce = true
+//
+//        Handler().postDelayed({ doubleBacktoExitPressedOnce = false }, 2000)
+
+        if(fm!!.backStackEntryCount == 2)
         {
             super.onBackPressed()
+            setToolbar(true, "Potato Corner")
         }
+
+        if(fm!!.backStackEntryCount >2)
+        {
+            super.onBackPressed()
+            super.onBackPressed()
+            setToolbar(true, "Potato Corner")
+        }
+
 
         if (fm?.backStackEntryCount == 0) {
             if (cart.isNotEmpty()) {
@@ -239,7 +267,7 @@ class MainActivity : AppCompatActivity() {
             } else {
 
                 val alert = AlertDialog.Builder(this)
-                alert.setTitle("Exit to Login Page")
+                alert.setTitle("Confirm Logout")
                 alert.setMessage("Are you sure you want to logout?")
                 alert.setNegativeButton("No", { _, _ ->
 
@@ -249,9 +277,10 @@ class MainActivity : AppCompatActivity() {
                 }).show()
 
             }
-        } else {
-            setToolbar(true, "Potato Corner")
+        }
+        else{
             super.onBackPressed()
+            setToolbar(true, "Potato Corner")
         }
     }
 
@@ -301,6 +330,20 @@ class MainActivity : AppCompatActivity() {
         }.commit()
     }
 
+    fun addnewFragment(fragment: Fragment?, tag: String) {
+        fm!!.beginTransaction().apply {
+            replace(R.id.main_frame, fragment, tag)
+            //addToBackStack(tag)
+        }.commit()
+    }
+
+    fun removeFragment(fragment: Fragment?){
+        fm!!.beginTransaction().remove(fragment).commitAllowingStateLoss()
+        fm!!.popBackStack()
+
+    }
+
+
     fun setCartCount(count: Int) {
         cartmenu?.tv_cart_count?.text = count.toString()
         productCount = count
@@ -339,5 +382,7 @@ class MainActivity : AppCompatActivity() {
         return state
 
     }
+
+
 
 }
