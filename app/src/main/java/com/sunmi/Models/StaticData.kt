@@ -19,7 +19,7 @@ class StaticData {
                     "Cheddar",
                     "",
                     0.00,
-                    0
+                    1
 
             ))
             product.add(Product(
@@ -31,7 +31,7 @@ class StaticData {
                     "Barbeque",
                     "",
                     0.00,
-                    0
+                    1
             ))
             product.add(Product(
                     "300",
@@ -42,7 +42,7 @@ class StaticData {
                     "Salted Caramel",
                     "",
                     0.00,
-                    0
+                    1
             ))
             product.add(Product(
                     "400",
@@ -53,7 +53,7 @@ class StaticData {
                     "Wasabi",
                     "",
                     0.00,
-                    0
+                    1
             ))
             product.add(Product(
                     "500",
@@ -64,7 +64,7 @@ class StaticData {
                     "Sour & Cream",
                     "",
                     0.00,
-                    0
+                    1
             ))
             product.add(Product(
                     "600",
@@ -75,7 +75,7 @@ class StaticData {
                     "Chili Barbeque",
                     "",
                     0.00,
-                    0
+                    1
             ))
             product.add(Product(
                     "700",
@@ -86,7 +86,7 @@ class StaticData {
                     "Garlic Parmesan",
                     "",
                     0.00,
-                    0
+                    1
             ))
             product.add(Product(
                     "800",
@@ -97,7 +97,7 @@ class StaticData {
                     "Cinnamon $ Sugar",
                     "",
                     0.00,
-                    0
+                    1
             ))
             return product
 

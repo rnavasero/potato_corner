@@ -30,7 +30,7 @@ class StaticSizeData {
                     "",
                     "Large",
                     55.00,
-                    0
+                    1
             ))
             product.add(Product(
                     "2200",
@@ -41,7 +41,7 @@ class StaticSizeData {
                     "",
                     "Jumbo",
                     79.00,
-                    0
+                    1
             ))
             product.add(Product(
                     "2300",
@@ -52,7 +52,7 @@ class StaticSizeData {
                     "",
                     "Mega",
                     99.00,
-                    0
+                    1
             ))
             product.add(Product(
                     "2400",
@@ -63,7 +63,7 @@ class StaticSizeData {
                     "",
                     "Giga",
                     149.00,
-                    0
+                    1
             ))
             product.add(Product(
                     "2500",
@@ -74,7 +74,7 @@ class StaticSizeData {
                     "",
                     "Terra",
                     199.00,
-                    0
+                    1
             ))
             return product
 

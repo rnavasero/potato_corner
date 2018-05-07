@@ -29,7 +29,7 @@ class CheckOutRecyclerAdapter(val mContext:Context):RecyclerView.Adapter<CheckOu
         return mActivity!!.cart.size
     }
 
-    fun updateCart(product: Product){
+    private fun updateCart(product: Product){
         for (i in 0 until mActivity!!.cart.size){
             if (mActivity!!.cart[i].id == product.id){
                 mActivity!!.cart[i].qty = product.qty
@@ -51,7 +51,7 @@ class CheckOutRecyclerAdapter(val mContext:Context):RecyclerView.Adapter<CheckOu
 
         fun onBindItemHolder(position: Int){
 
-            val product                         = mActivity!!.cart[position]
+            val product = mActivity!!.cart[position]
             itemView!!.tv_cart_product_name!!.text  = product.name
             itemView.tv_cart_product_price!!.text    = String.format("P %.2f", product.price.toFloat())
             itemView.tv_cart_qty!!.text = product.qty.toString()

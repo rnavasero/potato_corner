@@ -6,12 +6,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.example.codemagnus.newproject.Fragments.CheckOutFragment
 import com.example.codemagnus.newproject.Fragments.SizeSelectionFragment
 import com.example.codemagnus.newproject.Models.Product
 import com.squareup.picasso.Picasso
 import com.sunmi.Activities.MainActivity
 import com.sunmi.printerhelper.R
+import kotlinx.android.synthetic.main.dialog_confirm_checkout.*
 import kotlinx.android.synthetic.main.size_content.view.*
 
 /**
@@ -43,6 +45,8 @@ class SizeAdapter(val mContext:Context,var category:String?, var flavor:String?,
 
     open inner class ViewHolder(view: View):RecyclerView.ViewHolder(view) {
 
+        private var itemExist = false
+
         private val c = category
         private val f = flavor
         private val id = itemID
@@ -66,7 +70,7 @@ class SizeAdapter(val mContext:Context,var category:String?, var flavor:String?,
                         item.category = "Flavored Fries"
                         item.flavor = f!!
                         item.name = c!!
-                        item.qty = 1
+                        item.qty = item.qty
                         item.size = size
                         item.imgUrl = image
                         SizeSelectionFragment().newInstance(item)
@@ -78,7 +82,7 @@ class SizeAdapter(val mContext:Context,var category:String?, var flavor:String?,
                         item.category = c!!
                         item.flavor = f!!
                         item.name = c
-                        item.qty = 1
+                        item.qty = item.qty
                         item.size = size
                         item.imgUrl = image
                         SizeSelectionFragment().newInstance(item)
@@ -89,7 +93,7 @@ class SizeAdapter(val mContext:Context,var category:String?, var flavor:String?,
                         item.category = c!!
                         item.flavor = f!!
                         item.name = c
-                        item.qty = 1
+                        item.qty = item.qty
                         item.size = size
                         item.imgUrl = image
                         SizeSelectionFragment().newInstance(item)
@@ -100,7 +104,7 @@ class SizeAdapter(val mContext:Context,var category:String?, var flavor:String?,
                         item.category = c!!
                         item.flavor = f!!
                         item.name = c
-                        item.qty = 1
+                        item.qty = item.qty
                         item.size = size
                         item.imgUrl = image
                         SizeSelectionFragment().newInstance(item)
@@ -111,7 +115,7 @@ class SizeAdapter(val mContext:Context,var category:String?, var flavor:String?,
                         item.category = c!!
                         item.flavor = f!!
                         item.name = c
-                        item.qty = 1
+                        item.qty = item.qty
                         item.size = size
                         item.imgUrl = image
                         SizeSelectionFragment().newInstance(item)
@@ -122,24 +126,45 @@ class SizeAdapter(val mContext:Context,var category:String?, var flavor:String?,
                         item.category = c!!
                         item.flavor = f!!
                         item.name = c
-                        item.qty = 1
+                        item.qty = item.qty
                         item.size = size
                         item.imgUrl = image
                         SizeSelectionFragment().newInstance(item)
                     }
                 }
-                mActivity!!.cart.add(Product(item.id, item.name, item.description, item.imgUrl,item.category,item.flavor,item.size,item.price,item.qty))
-                mActivity!!.setCartCount(mActivity!!.productCount+1)
+
+                Log.i(TAG2,item.id)
+                checkProduct(item)
+                if(mActivity!!.itemCheck){
+                    updateCart(item)
+                }
+                else{
+                    mActivity!!.cart.add(Product(item.id, item.name, item.description, item.imgUrl,item.category,item.flavor,item.size,item.price,item.qty))
+                    mActivity!!.setCartCount(mActivity!!.productCount+1)
+                }
                 SizeSelectionFragment().newInstance(item)
                 mActivity!!.newFragment(CheckOutFragment(),CheckOutFragment.TAG)
                 Log.i(TAG2,item.toString())
-
-
+                mActivity!!.itemCheck = false
             }
+        }
 
+        private fun checkProduct(product: Product){
+            for (i in 0 until mActivity!!.cart.size){
+                if (mActivity!!.cart[i].id == product.id){
+                    mActivity!!.itemCheck = true
+                }
+            }
+        }
 
-
-
+        private fun updateCart(product: Product){
+            for (i in 0 until mActivity!!.cart.size){
+                if (mActivity!!.cart[i].id == product.id){
+                    mActivity!!.cart[i].qty += 1
+                    mActivity!!.setCartCount(mActivity!!.productCount+1)
+                    notifyItemChanged(i)
+                }
+            }
         }
 
 

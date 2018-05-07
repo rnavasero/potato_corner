@@ -18,6 +18,7 @@ import com.mycart.advance.https.API
 import com.mycart.advance.https.APIRequest
 import com.sunmi.Activities.MainActivity
 import com.sunmi.Fragments.FragmentReceipt
+import com.sunmi.HTTP.AppController
 import com.sunmi.printerhelper.R
 import com.sunmi.printerhelper.utils.AidlUtil
 import kotlinx.android.synthetic.main.dialog_confirm_checkout.view.*
@@ -44,7 +45,6 @@ class CheckOutFragment: Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         AidlUtil.getInstance().initPrinter()
     }
 

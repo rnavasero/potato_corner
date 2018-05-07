@@ -43,6 +43,12 @@
     <string name="function_threeline">Paper Feed</string>
     <string name="function_buffer">Transaction Print</string>
 
+    <string name="generic_server_down">Server Down</string>
+    <string name="no_internet">No Internet Connection</string>
+    <string name="generic_error">Error</string>
+
+
+
     <!--titles-->
     <string name="setting_title">Setting</string>
     <string name="info_title">PrinterInformation</string>

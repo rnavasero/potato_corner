@@ -3,28 +3,42 @@ package com.sunmi.Activities
 /**
  * Created by codemagnus on 4/5/18.
  */
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.pdf.PdfDocument
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
+import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.support.annotation.RequiresApi
+import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
+import android.support.v4.content.ContextCompat
 import android.support.v4.content.ContextCompat.startActivity
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.PopupMenu
 import android.support.v7.widget.Toolbar
 import android.text.TextUtils.replace
+import android.util.DisplayMetrics
 import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
+import android.view.WindowManager
+import android.widget.Button
+import android.widget.ImageView
 import android.widget.Toast
 import com.android.volley.Request
 import com.android.volley.Response
@@ -53,6 +67,9 @@ import kotlinx.android.synthetic.main.dialog_confirm_checkout.view.*
 import kotlinx.android.synthetic.main.layout_cart.view.*
 import kotlinx.android.synthetic.main.menu.*
 import org.json.JSONObject
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
 import java.nio.charset.Charset
 import java.util.HashMap
 
@@ -72,7 +89,9 @@ class MainActivity : AppCompatActivity() {
     var sData:MutableList<Product> = mutableListOf()
     var sData2:MutableList<Product> = mutableListOf()
     var sData3:MutableList<Product> = mutableListOf()
-    var doubleBacktoExitPressedOnce = false
+    var boolean_permission: Boolean = false
+    val REQUEST_PERMISSIONS = 1
+    var itemCheck:Boolean = false
 
 
     private var isAidl: Boolean = false
@@ -87,6 +106,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
+    @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
     @SuppressLint("InflateParams")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -94,6 +114,12 @@ class MainActivity : AppCompatActivity() {
 
         isAidl = true
         AidlUtil.getInstance().connectPrinterService(this)
+        fn_permission()
+
+        btn_View.setOnClickListener {
+            val intent1 = Intent(applicationContext, PDFViewActivity::class.java)
+            startActivity(intent1)
+        }
 
 
         fm = supportFragmentManager
@@ -378,6 +404,91 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
+    private fun fn_permission() {
+        if (ContextCompat.checkSelfPermission(applicationContext, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(applicationContext, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this@MainActivity, android.Manifest.permission.READ_EXTERNAL_STORAGE)) {
+            } else {
+                ActivityCompat.requestPermissions(this@MainActivity, arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE),
+                        REQUEST_PERMISSIONS)
+
+            }
+
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this@MainActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            } else {
+                ActivityCompat.requestPermissions(this@MainActivity, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                        REQUEST_PERMISSIONS)
+
+            }
+        } else {
+            boolean_permission = true
+
+
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == REQUEST_PERMISSIONS) {
+
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                //Toast.makeText(applicationContext, "Permission granted", Toast.LENGTH_LONG).show()
+                boolean_permission = true
+
+
+            } else {
+                Toast.makeText(applicationContext, "Please allow the permission", Toast.LENGTH_LONG).show()
+
+            }
+        }
+    }
+
+    @SuppressLint("SdCardPath")
+    @RequiresApi(Build.VERSION_CODES.KITKAT)
+    fun createPdf(bitmap:Bitmap) {
+        val wm = getSystemService(Context.WINDOW_SERVICE) as WindowManager
+        val display = wm.defaultDisplay
+        val displaymetrics = DisplayMetrics()
+        this.windowManager.defaultDisplay.getMetrics(displaymetrics)
+        val hight = displaymetrics.heightPixels.toFloat()
+        val width = displaymetrics.widthPixels.toFloat()
+
+        val convertHighet = hight.toInt()
+        val convertWidth = width.toInt()
+
+        //        Resources mResources = getResources();
+        //        Bitmap bitmap = BitmapFactory.decodeResource(mResources, R.drawable.screenshot);
+
+        val document = PdfDocument()
+        val pageInfo = PdfDocument.PageInfo.Builder(bitmap.getWidth(), bitmap.getHeight(), 1).create()
+        val page = document.startPage(pageInfo)
+
+        val canvas = page.canvas
+
+
+        val paint = Paint()
+        paint.color = Color.parseColor("#ffffff")
+        canvas.drawPaint(paint)
+
+
+
+        //bitmap = Bitmap.createScaledBitmap(bitmap, bitmap.getWidth(), bitmap.getHeight(), true)
+
+        paint.color = Color.BLUE
+        canvas.drawBitmap(bitmap, 0f, 0f, null)
+        document.finishPage(page)
+
+
+        // write the document content
+        val targetPdf = "/sdcard/test.pdf"
+        val filePath = File(targetPdf)
+        document.writeTo(FileOutputStream(filePath))
+
+        // close the document
+        document.close()
+    }
 
 
 }

@@ -2,10 +2,12 @@ package com.example.codemagnus.newproject.Adapters
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.codemagnus.newproject.Fragments.CheckOutFragment
+import com.example.codemagnus.newproject.Fragments.SizeSelectionFragment
 import com.example.codemagnus.newproject.Models.Product
 import com.sunmi.Activities.MainActivity
 import com.sunmi.printerhelper.R
@@ -89,12 +91,42 @@ class SizeSelectAdapter(private val mContext:Context, var _category:String?,var 
                         }
 
                     }
-                mActivity!!.cart.add(Product(item.id, item.name, item.description, item.imgUrl,item.category,item.flavor,item.size,item.price,item.qty))
-                mActivity!!.setCartCount(mActivity!!.productCount + 1)
+
+                Log.i(TAG2,item.id)
+                checkProduct(item)
+                if(mActivity!!.itemCheck){
+                    updateCart(item)
+                }
+                else{
+                    mActivity!!.cart.add(Product(item.id, item.name, item.description, item.imgUrl,item.category,item.flavor,item.size,item.price,item.qty))
+                    mActivity!!.setCartCount(mActivity!!.productCount+1)
+                }
+                SizeSelectionFragment().newInstance(item)
                 mActivity!!.newFragment(CheckOutFragment(),CheckOutFragment.TAG)
+                Log.i(TAG2,item.toString())
+                mActivity!!.itemCheck = false
             }
 
         }
+
+        private fun checkProduct(product: Product){
+            for (i in 0 until mActivity!!.cart.size){
+                if (mActivity!!.cart[i].id == product.id){
+                    mActivity!!.itemCheck = true
+                }
+            }
+        }
+
+        private fun updateCart(product: Product){
+            for (i in 0 until mActivity!!.cart.size){
+                if (mActivity!!.cart[i].id == product.id){
+                    mActivity!!.cart[i].qty += 1
+                    mActivity!!.setCartCount(mActivity!!.productCount+1)
+                    notifyItemChanged(i)
+                }
+            }
+        }
+
 
     }
 }
