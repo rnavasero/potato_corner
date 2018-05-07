@@ -9,6 +9,7 @@ import com.android.volley.VolleyError
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.codemagnus.newproject.Session.Session
+import com.sunmi.HTTP.ApplicationController
 import org.json.JSONException
 import org.json.JSONObject
 import java.nio.charset.Charset
@@ -54,7 +55,7 @@ object APIRequest {
                 return params
             }
         }
-        queue.add(request)
+        ApplicationController.getInstance().addToRequestQueue(request)
     }
 
     fun changePass(context: Context, url:String, params:MutableMap<String, String>, urlCallback: URLCallback){
