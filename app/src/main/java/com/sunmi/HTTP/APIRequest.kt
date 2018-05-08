@@ -55,7 +55,7 @@ object APIRequest {
                 return params
             }
         }
-        ApplicationController.getInstance().addToRequestQueue(request)
+        queue.add(request)
     }
 
     fun changePass(context: Context, url:String, params:MutableMap<String, String>, urlCallback: URLCallback){

@@ -116,10 +116,10 @@ class MainActivity : AppCompatActivity() {
         AidlUtil.getInstance().connectPrinterService(this)
         fn_permission()
 
-        btn_View.setOnClickListener {
-            val intent1 = Intent(applicationContext, PDFViewActivity::class.java)
-            startActivity(intent1)
-        }
+//        btn_View.setOnClickListener {
+//            val intent1 = Intent(applicationContext, PDFViewActivity::class.java)
+//            startActivity(intent1)
+//        }
 
 
         fm = supportFragmentManager

@@ -23,6 +23,7 @@ import com.sunmi.printerhelper.utils.AidlUtil
 import kotlinx.android.synthetic.main.dialog_confirm_checkout.view.*
 import kotlinx.android.synthetic.main.fragment_check_out.*
 import org.json.JSONArray
+import org.json.JSONException
 import org.json.JSONObject
 
 /**
@@ -80,14 +81,17 @@ class CheckOutFragment: Fragment() {
                 val dialog = alert.create()
                 v.btn_check_now.setOnClickListener{
                     mActivity!!.newFragment(FragmentReceipt(),FragmentReceipt.TAG)
-                    postCheckOut()
+                    try {
+                        postCheckOut()
 //                    Handler().postDelayed({
 //                        mActivity!!.newFragment(SuccessFragment(),SuccessFragment.TAG)
 //                    }, 1000)
+                        dialog.dismiss()
+                        mActivity!!.removeFragment(FragmentReceipt())
 
-                    dialog.dismiss()
-                    mActivity!!.removeFragment(FragmentReceipt())
-
+                    }catch (e: Exception){
+                        e.printStackTrace()
+                    }
 
                 }
                 dialog.show()
@@ -129,6 +133,7 @@ class CheckOutFragment: Fragment() {
                         mActivity?.cart = mutableListOf()
                         mActivity?.setCartCount(0)
                         mActivity!!.newFragment(SuccessFragment(),SuccessFragment.TAG)
+
                     }
                 }
 

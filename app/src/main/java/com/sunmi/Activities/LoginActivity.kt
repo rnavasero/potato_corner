@@ -53,12 +53,14 @@ class LoginActivity:AppCompatActivity() {
             startNewActivity()
         }
 
-        btn_login.setOnClickListener {
+        //var loginImage = layoutInflater.inflate(R.layout.layout_cart, null)
+
+        includedLayout.setOnClickListener {
             attemptLogin()
         }
     }
 
-    private fun postLogin(email:String, password:String) {
+    private fun postLogin(email:String, password:String) { 
         val params:MutableMap<String, String> = HashMap()
         params["username"] = email
         params["password"] = password
@@ -75,7 +77,7 @@ class LoginActivity:AppCompatActivity() {
                 Session(this@LoginActivity).authorize(response)
                 startNewActivity()
                 pDialog.dismiss()
-                Toast.makeText(this@LoginActivity, "SUCCESSFULLY LOGGED-IN", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(this@LoginActivity, "SUCCESSFULLY LOGGED-IN", Toast.LENGTH_SHORT).show()
 
             }
 
