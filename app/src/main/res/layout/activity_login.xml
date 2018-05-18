@@ -10,118 +10,124 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/bg_gradient_yellow_blue"
-        tools:context="com.mycart.advance.activities.LoginActivity"
-        android:paddingTop="30dp">
+        android:background="@drawable/bg_pc"
+        android:paddingTop="30dp"
+        tools:context="com.mycart.advance.activities.LoginActivity">
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="380dp"
-            android:layout_height="120dp"
+            android:layout_width="340dp"
+            android:layout_height="100dp"
             android:layout_marginEnd="142dp"
             android:layout_marginStart="142dp"
-            android:layout_marginTop="52dp"
+            android:layout_marginTop="80dp"
             android:contentDescription="@null"
-            android:src="@drawable/pclogonew"
             android:elevation="10dp"
+            android:src="@drawable/pclogonew"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed" />
 
-        <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
-            android:id="@+id/spinner"
-            style="@style/EditTextStyle"
-            android:layout_width="285dp"
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Select Store Branch"
-            tools:layout_editor_absoluteX="55dp"
-            tools:layout_editor_absoluteY="202dp"
+            android:text="Sign In"
+            android:textColor="@android:color/white"
+            android:textSize="36dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView"/>
+            app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/input_login_username"
-            style="@style/EditTextStyle"
-            android:layout_width="300dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="@+id/spinner"
-            app:layout_constraintStart_toStartOf="@+id/spinner"
-            app:layout_constraintTop_toBottomOf="@+id/spinner"
-            tools:ignore="UnknownId">
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="40dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView9">
 
-            <EditText
+            <AutoCompleteTextView
                 android:id="@+id/et_login_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/username"
-                android:shadowColor="@color/white"
-                android:textColor="@color/white"
-                android:textSize="@dimen/sp_16" />
+                android:drawableLeft="@drawable/ic_email"
+                android:drawableStart="@drawable/ic_email"
+                android:hint=" Enter email address"
+                android:imeOptions="actionNext"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textColor="@android:color/white"
+                android:textColorHint="@android:color/white" />
+
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/input_login_password"
-            style="@style/EditTextStyle"
             android:layout_width="0dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="4dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:elevation="5dp"
             app:layout_constraintEnd_toEndOf="@+id/input_login_username"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/input_login_username"
             app:layout_constraintTop_toBottomOf="@+id/input_login_username"
             app:passwordToggleEnabled="true">
 
-            <EditText
-                android:shadowColor="@color/white"
+            <android.support.v7.widget.AppCompatEditText
                 android:id="@+id/et_login_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_password"
+                android:drawableStart="@drawable/ic_password"
                 android:hint="@string/password"
+                android:imeActionId="6"
                 android:imeOptions="actionDone"
                 android:inputType="textPassword"
-                android:textColor="@color/white"
-                android:textSize="@dimen/sp_16" />
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textColor="@android:color/white"
+                android:textColorHint="@android:color/white"
+                android:textCursorDrawable="@null"
+                app:backgroundTint="@android:color/white" />
+
         </android.support.design.widget.TextInputLayout>
 
-        <Button
-            android:id="@+id/btn_login"
-            android:layout_width="280dp"
-            android:layout_height="45dp"
-            android:layout_marginTop="32dp"
-            android:background="@drawable/rounded_button_green"
-            android:elevation="10dp"
-            android:gravity="center"
-            android:shadowColor="@color/white"
-            android:text="L O g i n"
-            android:textColor="#FFFF00"
-            android:textSize="20dp"
-            android:textStyle="bold"
+        <include
+            android:id="@+id/includedLayout"
+            layout="@layout/login_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="98dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/textView10"
+            app:layout_constraintStart_toStartOf="@+id/textView10"
+            app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="5dp"
+            android:text="Forgot password?"
+            android:textColor="@android:color/white"
+            android:textSize="12dp"
             app:layout_constraintEnd_toEndOf="@+id/input_login_password"
-            app:layout_constraintHorizontal_bias="0.494"
             app:layout_constraintStart_toStartOf="@+id/input_login_password"
             app:layout_constraintTop_toBottomOf="@+id/input_login_password" />
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="350dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="50dp"
-            android:elevation="4dp"
-            android:tint="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_login"
-            app:layout_constraintVertical_bias="0.866"
-            app:srcCompat="@drawable/pclogo"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="30dp" />
 
 
     </android.support.constraint.ConstraintLayout>
 </FrameLayout>
-
 

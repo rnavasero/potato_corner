@@ -92,6 +92,7 @@ class SizeSelectAdapter(private val mContext:Context, var _category:String?,var 
                 mActivity!!.cart.add(Product(item.id, item.name, item.description, item.imgUrl,item.category,item.flavor,item.size,item.price,item.qty))
                 mActivity!!.setCartCount(mActivity!!.productCount + 1)
                 mActivity!!.newFragment(CheckOutFragment(),CheckOutFragment.TAG)
+                mActivity!!.setCartState(true)
             }
 
         }

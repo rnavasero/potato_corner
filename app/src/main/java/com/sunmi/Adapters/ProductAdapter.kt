@@ -1,11 +1,13 @@
 package com.example.codemagnus.newproject.Adapters
 
 import android.content.Context
+import android.support.v7.app.AlertDialog
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.codemagnus.newproject.Fragments.CheckOutFragment
 import com.example.codemagnus.newproject.Fragments.SizeSelectionFragment
 import com.example.codemagnus.newproject.Models.Product
 import com.squareup.picasso.Picasso

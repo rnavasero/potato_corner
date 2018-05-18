@@ -5,6 +5,7 @@
     android:background="?attr/selectableItemBackgroundBorderless"
     android:clickable="true"
     android:focusable="true"
+    android:layout_margin="5dp"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
@@ -13,13 +14,8 @@
         android:id="@+id/cv_item2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="12dp"
         android:clickable="true"
         android:focusable="true"
-        app:cardCornerRadius="5dp"
-        app:contentPadding="5dp"
-        app:cardElevation="5dp"
         app:cardBackgroundColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,8 +26,6 @@
             android:id="@+id/iv_item_content2"
             android:layout_width="130dp"
             android:layout_height="130dp"
-            android:background="@color/yellow"
-            android:padding="5dp"
             android:src="@drawable/ic_logo"
             tools:layout_editor_absoluteX="150dp"
             tools:layout_editor_absoluteY="106dp" />

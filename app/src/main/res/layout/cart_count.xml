@@ -16,7 +16,7 @@
         android:id="@+id/imageView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_cart" />
+        android:src="@drawable/ic_shopping_cart" />
 
     <TextView
         android:id="@+id/tv_cart_count"

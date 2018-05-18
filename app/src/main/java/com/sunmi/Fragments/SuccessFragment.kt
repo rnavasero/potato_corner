@@ -23,6 +23,7 @@ class SuccessFragment: Fragment() {
     companion object {
         val TAG: String = SuccessFragment::class.java.simpleName
         var instance:SuccessFragment? = SuccessFragment()
+        fun newInstance(): SuccessFragment = SuccessFragment()
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -32,7 +33,7 @@ class SuccessFragment: Fragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         instance = this
-        mActivity?.setToolbar(false, "Success")
+        mActivity?.setToolbar(false)
     }
 
     override fun onDestroy() {

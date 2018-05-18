@@ -9,7 +9,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
 import android.widget.Toast
 import com.android.volley.VolleyError
 import com.example.codemagnus.newproject.Adapters.CheckOutRecyclerAdapter
@@ -18,8 +17,6 @@ import com.mycart.advance.https.APIRequest
 import com.sunmi.Activities.MainActivity
 import com.sunmi.Fragments.FragmentReceipt
 import com.sunmi.printerhelper.R
-import com.sunmi.printerhelper.R.id.btn_checkout
-import com.sunmi.printerhelper.R.id.tv_checkout_total_price
 import com.sunmi.printerhelper.utils.AidlUtil
 import kotlinx.android.synthetic.main.dialog_confirm_checkout.view.*
 import kotlinx.android.synthetic.main.fragment_check_out.*
@@ -41,11 +38,11 @@ class CheckOutFragment: Fragment() {
     companion object {
         val TAG:String = CheckOutFragment::class.java.simpleName
         var instance:CheckOutFragment? = CheckOutFragment()
+            fun newInstance(): CheckOutFragment = CheckOutFragment()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         AidlUtil.getInstance().initPrinter()
     }
 
@@ -56,14 +53,14 @@ class CheckOutFragment: Fragment() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         mActivity = context as MainActivity?
-        mActivity?.setToolbar(false, getString(R.string.checkout))
+        mActivity?.setToolbar(false)
+        mActivity?.setCartState(true)
         setTotalPrice()
 
         if (mActivity?.cart!!.isNotEmpty()){
             tv_empty_cart.visibility    = View.GONE
-            img_cart.visibility         = View.GONE
+            imgcart.visibility         = View.GONE
             adapter                     = CheckOutRecyclerAdapter(context)
             rv_check_out.layoutManager  = LinearLayoutManager(context)
             rv_check_out.adapter        = adapter

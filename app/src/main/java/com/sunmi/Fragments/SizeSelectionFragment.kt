@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.annotation.RequiresApi
 import android.support.v7.widget.GridLayoutManager
 import android.util.Log
+import android.util.Size
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -55,7 +56,7 @@ class SizeSelectionFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         mActivity = context as MainActivity?
-        mActivity?.setToolbar(false, "Choose desired size")
+        mActivity?.setToolbar(false)
         adapter = SizeAdapter(context, category,flavor, i_id)
         mAdapter = SizeSelectAdapter(context, category, i_image, n_name, i_id)
 
