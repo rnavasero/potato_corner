@@ -1,5 +1,6 @@
-package com.example.codemagnus.newproject.Models
+package com.sunmi.Models
 
+import com.sunmi.Models.Product
 import com.sunmi.printerhelper.R
 
 

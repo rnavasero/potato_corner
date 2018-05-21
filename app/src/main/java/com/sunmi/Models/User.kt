@@ -1,4 +1,4 @@
-package com.example.codemagnus.newproject.Models
+package com.sunmi.Models
 
 import org.json.JSONException
 import org.json.JSONObject

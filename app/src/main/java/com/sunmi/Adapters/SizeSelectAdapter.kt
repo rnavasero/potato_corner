@@ -7,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.example.codemagnus.newproject.Fragments.CheckOutFragment
-import com.example.codemagnus.newproject.Models.Product
 import com.sunmi.Activities.MainActivity
+import com.sunmi.Models.Product
 import com.sunmi.printerhelper.R
 import kotlinx.android.synthetic.main.layout_size.view.*
 

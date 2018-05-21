@@ -7,9 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.codemagnus.newproject.Fragments.CheckOutFragment
-import com.example.codemagnus.newproject.Models.Product
 import com.sunmi.Activities.MainActivity
 import com.squareup.picasso.Picasso
+import com.sunmi.Models.Product
 import com.sunmi.printerhelper.R
 import kotlinx.android.synthetic.main.row_check_out.view.*
 

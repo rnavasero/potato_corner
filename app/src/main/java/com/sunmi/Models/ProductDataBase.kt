@@ -1,4 +1,4 @@
-package com.example.codemagnus.newproject.Models
+package com.sunmi.Models
 
 import android.arch.persistence.room.Database
 import android.arch.persistence.room.Room
@@ -20,7 +20,7 @@ abstract class ProductDataBase : RoomDatabase() {
             if (INSTANCE == null) {
                 synchronized(ProductDataBase::class){
                     INSTANCE = Room.databaseBuilder(context.applicationContext,
-                            ProductDataBase::class.java, "newproject.db").build()
+                            ProductDataBase::class.java, "pc.db").build()
                 }
             }
             return INSTANCE as ProductDataBase

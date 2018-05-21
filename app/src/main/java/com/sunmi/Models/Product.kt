@@ -1,10 +1,8 @@
-package com.example.codemagnus.newproject.Models
+package com.sunmi.Models
 
 import android.arch.persistence.room.ColumnInfo
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
-import android.os.Parcel
-import android.os.Parcelable
 import org.json.JSONException
 import org.json.JSONObject
 
@@ -17,14 +15,14 @@ class Product{
     constructor()
 
 
-
     @PrimaryKey(autoGenerate = true)
-    var dbId: Int = 0
+    @ColumnInfo(name = "product_id")
+    var pid: Long = 0
 
     @ColumnInfo(name = "id")
     var id: String = ""
 
-    @ColumnInfo(name = "name")
+    @ColumnInfo(name = "sku")
     var sku: String = ""
 
     @ColumnInfo(name = "name")
@@ -45,7 +43,6 @@ class Product{
     @ColumnInfo(name = "image_path")
     var imgUrl = 0
 
-    @ColumnInfo(name = "qty")
     var qty: Int = 0
 
 
@@ -98,6 +95,21 @@ class Product{
         }catch (e: JSONException){
             0
         }
+    }
+
+
+
+    constructor(product_id:Long,id: String, sku: String, name: String, category: String, size: String, flavor: String, price: Double, imgUrl: Int, qty: Int) {
+        this.pid = product_id
+        this.id = id
+        this.sku = sku
+        this.name = name
+        this.category = category
+        this.size = size
+        this.flavor = flavor
+        this.price = price
+        this.imgUrl = imgUrl
+        this.qty = qty
     }
 
     constructor(id: String, sku: String, name: String, category: String, size: String, flavor: String, price: Double, imgUrl: Int, qty: Int) {

@@ -11,9 +11,9 @@ import android.widget.TextView
 import android.widget.Toast
 import com.example.codemagnus.newproject.Fragments.CheckOutFragment
 import com.example.codemagnus.newproject.Fragments.SizeSelectionFragment
-import com.example.codemagnus.newproject.Models.Product
 import com.squareup.picasso.Picasso
 import com.sunmi.Activities.MainActivity
+import com.sunmi.Models.Product
 import com.sunmi.printerhelper.R
 import kotlinx.android.synthetic.main.category_content.view.*
 

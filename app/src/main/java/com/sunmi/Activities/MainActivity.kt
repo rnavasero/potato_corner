@@ -36,22 +36,26 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
 import com.android.volley.VolleyError
+import com.example.codemagnus.newproject.Adapters.CheckOutRecyclerAdapter
 import com.example.codemagnus.newproject.Adapters.ProductAdapter
 import com.example.codemagnus.newproject.Fragments.CheckOutFragment
 import com.example.codemagnus.newproject.Fragments.SuccessFragment
-import com.example.codemagnus.newproject.Models.Product
-import com.example.codemagnus.newproject.Models.ProductDataBase
-import com.example.codemagnus.newproject.Models.StaticData
-import com.example.codemagnus.newproject.Models.StaticSizeData
 import com.example.codemagnus.newproject.Session.Session
 import com.mycart.advance.https.API
 import com.mycart.advance.https.APIRequest
 import com.sunmi.Fragments.ProfileFragment
+import com.sunmi.Models.Product
+import com.sunmi.Models.ProductDataBase
+import com.sunmi.Models.StaticData
 import com.sunmi.printerhelper.R
 import com.sunmi.printerhelper.utils.AidlUtil
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.changepass.view.*
 import kotlinx.android.synthetic.main.menu.*
+import kotlinx.coroutines.experimental.Deferred
+import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.experimental.async
+import org.jetbrains.anko.coroutines.experimental.bg
 import org.json.JSONException
 import org.json.JSONObject
 import java.io.File
@@ -61,8 +65,8 @@ import java.util.HashMap
 
 class MainActivity : AppCompatActivity() {
 
-    private val TAG2 = "#####################"
-
+    private val TAG2 = "loadAll"
+    var mAdapter = CheckOutRecyclerAdapter(this)
     var arrowBack: View? = null
     var arrowNext: View? = null
     var cart: MutableList<Product> = mutableListOf()
@@ -100,7 +104,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        productDB = ProductDataBase.init(this@MainActivity)
         navigationView.onNavigationItemSelectedListener = mOnNavigationItemSelectedListener
         mToolbar.title = "MENU"
         setOrderState(true)
@@ -109,7 +113,7 @@ class MainActivity : AppCompatActivity() {
 
         isAidl = true
         AidlUtil.getInstance().connectPrinterService(this)
-        fn_permission()
+        //fn_permission()
 
 //        btn_View.setOnClickListener {
 //            val intent1 = Intent(applicationContext, PDFViewActivity::class.java)
@@ -118,7 +122,7 @@ class MainActivity : AppCompatActivity() {
 
 
         fm = supportFragmentManager
-        staticData = StaticSizeData.getlists()
+        staticData = StaticData.getlists()
         sData = StaticData.getlists4()
         sData2 = StaticData.getlists2()
         sData3 = StaticData.getlists3()
@@ -193,7 +197,6 @@ class MainActivity : AppCompatActivity() {
                             v.input_cnew_password.error = "Password mismatch!"
                         }
 
-                        0
                         val params:MutableMap<String, String> = HashMap()
                         params["currentPassword"] = cp
                         params["newPassword"] = np
@@ -210,11 +213,8 @@ class MainActivity : AppCompatActivity() {
 
                         })
 
-
                     }
-
                     dialog.show()
-
                 }
 
                 R.id.menu_logout -> {
@@ -260,7 +260,6 @@ class MainActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_profile -> {
-                setReceiptState(true)
                 val toFragment = ProfileFragment.newInstance()
                 openFragment(toFragment)
                 return@OnNavigationItemSelectedListener true
@@ -268,6 +267,7 @@ class MainActivity : AppCompatActivity() {
         }
         false
     }
+
 
     private fun openFragment(fragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
@@ -563,6 +563,24 @@ class MainActivity : AppCompatActivity() {
         document.close()
     }
 
+    private fun getSavedCart(){
+        cart = ArrayList()
+        var count = 0
+        async(UI){
+            val getSaveData: Deferred<List<Product>?> = bg {
+                productDB?.productDao()?.loadAll()
+            }
+
+            for (i in 0 until getSaveData.await()!!.size){
+                cart.add(getSaveData.await()!![i])
+                mAdapter.updateCart(getSaveData.await()!![i])
+
+                count += getSaveData.await()!![i].qty
+                setCartCount(count)
+            }
+        }
+    }
+
     private fun getAllProducts(){
         APIRequest.get(this, API.PRODUCTS, object : APIRequest.URLCallback{
             override fun didUrlResponse(response: String) {
@@ -577,10 +595,6 @@ class MainActivity : AppCompatActivity() {
                         productList.add(product)
                     }
 
-                    for (items in productList){
-                        productDB?.productDao()?.insert(items)
-                    }
-
                     if (productList.isNotEmpty()){
                         //setRecyclerView()
                         //getSavedCart()
@@ -588,6 +602,10 @@ class MainActivity : AppCompatActivity() {
                 }catch (e: JSONException){
                     e.printStackTrace()
                 }
+
+//                for (items in productList){
+//                    productDB?.productDao()?.insert(items)
+//                }
             }
 
             override fun didUrlError(error: VolleyError) {

@@ -6,7 +6,7 @@ package com.example.codemagnus.newproject.Session
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
-import com.example.codemagnus.newproject.Models.User
+import com.sunmi.Models.User
 //import com.mycart.advance.models.User
 import org.json.JSONObject
 

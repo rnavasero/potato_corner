@@ -14,8 +14,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.codemagnus.newproject.Adapters.SizeAdapter
 import com.example.codemagnus.newproject.Adapters.SizeSelectAdapter
-import com.example.codemagnus.newproject.Models.Product
 import com.sunmi.Activities.MainActivity
+import com.sunmi.Models.Product
 import com.sunmi.printerhelper.R
 import kotlinx.android.synthetic.main.fragment_size_selection.*
 
