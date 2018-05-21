@@ -12,91 +12,91 @@ class StaticData {
             var product = ArrayList<Product>()
             product.add(Product(
                     "100",
-                    "CHEDDAR",
-                    "Description",
-                    R.drawable.cheese,
-                    "Flavored Fries",
-                    "Cheddar",
+                    "f11",
+                    "Flavored Fries Cheddar",
+                    "FLAVORED FRIES",
                     "",
+                    "Cheddar",
                     0.00,
+                    R.drawable.cheese,
                     0
 
             ))
             product.add(Product(
                     "200",
-                    "BARBEQUE",
-                    "Description",
-                    R.drawable.cheese,
-                    "Flavored Fries",
-                    "Barbeque",
+                    "f12",
+                    "Flavored Fries Barbeque",
+                    "FLAVORED FRIES",
                     "",
+                    "Barbeque",
                     0.00,
+                    0,
                     0
             ))
             product.add(Product(
                     "300",
-                    "SALTED CARAMEL",
-                    "Description",
-                    R.drawable.cheese,
-                    "Flavored Fries",
-                    "Salted Caramel",
+                    "f13",
+                    "Flavored Fries Salted Caramel",
+                    "FLAVORED FRIES",
                     "",
+                    "Salted Caramel",
                     0.00,
+                    0,
                     0
             ))
             product.add(Product(
                     "400",
-                    "WASABI",
-                    "Description",
-                    R.drawable.cheese,
-                    "Flavored Fries",
-                    "Wasabi",
+                    "f14",
+                    "Flavored Fries Wasabi",
+                    "FLAVORED FRIES",
                     "",
+                    "Wasabi",
                     0.00,
+                    0,
                     0
             ))
             product.add(Product(
                     "500",
-                    "SOUR CREAM",
-                    "Description",
-                    R.drawable.cheese,
-                    "Flavored Fries",
-                    "Sour & Cream",
+                    "f15",
+                    "Flavored Fries Sour & Cream",
+                    "FLAVORED FRIES",
                     "",
+                    "Sour & Cream",
                     0.00,
+                    0,
                     0
             ))
             product.add(Product(
                     "600",
-                    "CHILI BBQ",
-                    "Description",
-                    R.drawable.cheese,
-                    "Flavored Fries",
+                    "f16",
+                    "Flavored Fries Chili Barbeque",
+                    "FLAVORED FRIES",
+                    " Fries",
                     "Chili Barbeque",
-                    "",
                     0.00,
+                    0,
                     0
             ))
             product.add(Product(
                     "700",
-                    "GARLIC PARMESAN",
-                    "Description",
-                    R.drawable.cheese,
-                    "Flavored Fries",
-                    "Garlic Parmesan",
+                    "f17",
+                    "Flavored Fries Garlic Parmesan",
+                    "FLAVORED FRIES",
                     "",
+                    "Garlic Parmesan",
                     0.00,
+                    0,
                     0
             ))
             product.add(Product(
                     "800",
-                    "CINNAMON & SUGAR",
-                    "Description",
-                    R.drawable.cheese,
+                    "f18",
+                    "Flavored Fries Cinnamon & Sugar",
+                    "FLAVORED FRIES",
                     "Flavored Fries",
                     "Cinnamon $ Sugar",
-                    "",
                     0.00,
+                    0,
                     0
             ))
             return product
@@ -108,13 +108,13 @@ class StaticData {
             var product = ArrayList<Product>()
             product.add(Product(
                     "900",
-                    "SOFTDRINKS",
-                    "Description",
-                    R.drawable.softdrinks,
-                    "Beverages",
-                    "Cinnamon $ Sugar",
+                    "f19",
+                    "Softdrinks",
+                    "DRINKS",
+                    "",
                     "",
                     0.00,
+                    0,
                     0
 
             ))
@@ -122,38 +122,38 @@ class StaticData {
 
             product.add(Product(
                     "1000",
-                    "ICED TEA",
-                    "Description",
-                    R.drawable.icedtead,
-                    "Beverages",
-                    "Cinnamon $ Sugar",
+                    "f20",
+                    "Iced Tea",
+                    "DRINKS",
+                    "",
                     "",
                     0.00,
+                    0,
                     0
             ))
 
 
             product.add(Product(
                     "1100",
-                    "BOTTLED WATER",
-                    "Description",
-                    R.drawable.water,
+                    "f21",
+                    "Bottled Water",
+                    "DRINKS",
                     "Beverages",
                     "Cinnamon $ Sugar",
-                    "",
                     0.00,
+                    0,
                     0
             ))
 
             product.add(Product(
                     "1200",
-                    "MINUTE MAID",
-                    "Description",
-                    R.drawable.minutemaid,
-                    "Beverages",
-                    "Cinnamon $ Sugar",
+                    "f22",
+                    "Minute Maid",
+                    "DRINKS",
+                    "",
                     "",
                     0.00,
+                    0,
                     0
             ))
 
@@ -166,51 +166,51 @@ class StaticData {
             var product = ArrayList<Product>()
             product.add(Product(
                     "1300",
-                    "LOOPY FRIES",
-                    "Description",
-                    R.drawable.loopyfries,
-                    "Fancy Fries",
+                    "f23",
+                    "Loopy Fries",
+                    "FANCY FRIES",
                     "",
                     "",
                     0.00,
+                    0,
                     0
             ))
 
 
             product.add(Product(
                     "1400",
-                    "HASH BROWN",
-                    "Description",
-                    R.drawable.hashbrown,
-                    "Fancy Fries",
+                    "f24",
+                    "Hash Brown",
+                    "FANCY FRIES",
                     "",
                     "",
                     0.00,
+                    0,
                     0
             ))
 
 
             product.add(Product(
                     "1500",
-                    "JOJOS",
-                    "Description",
-                    R.drawable.jojos,
+                    "f25",
+                    "Jojos",
+                    "FANCY FRIES",
                     "Fancy Fries",
                     "",
-                    "",
                     0.00,
+                    0,
                     0
             ))
 
             product.add(Product(
                     "1600",
-                    "CHEEZY FRIES",
-                    "Description",
-                    R.drawable.cheese,
+                    "f26",
+                    "Cheezy Fries",
+                    "FANCY FRIES",
                     "Fancy Fries",
                     "",
-                    "",
                     0.00,
+                    0,
                     0
             ))
 
@@ -225,11 +225,11 @@ class StaticData {
                     "1700",
                     "",
                     "",
-                    R.drawable.cheese,
-                    "",
                     "",
                     "Small",
+                    "",
                     0.00,
+                    0,
                     0
             ))
 
@@ -238,11 +238,11 @@ class StaticData {
                     "1800",
                     "",
                     "",
-                    R.drawable.cheese,
-                    "",
                     "",
                     "Medium",
+                    "",
                     0.00,
+                    0,
                     0
             ))
 
@@ -251,11 +251,11 @@ class StaticData {
                     "1900",
                     "",
                     "",
-                    R.drawable.cheese,
-                    "",
                     "",
                     "Large",
+                    "",
                     0.00,
+                    0,
                     0
             ))
 

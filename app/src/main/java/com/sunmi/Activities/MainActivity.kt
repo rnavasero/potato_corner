@@ -51,6 +51,7 @@ import com.sunmi.printerhelper.utils.AidlUtil
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.changepass.view.*
 import kotlinx.android.synthetic.main.menu.*
+import org.json.JSONException
 import org.json.JSONObject
 import java.io.File
 import java.io.FileOutputStream
@@ -64,6 +65,7 @@ class MainActivity : AppCompatActivity() {
     var arrowBack: View? = null
     var arrowNext: View? = null
     var cart: MutableList<Product> = mutableListOf()
+    var productList: MutableList<Product> = mutableListOf()
     private var cartView: View? = null
     var fm: FragmentManager? = null
     var session: Session? = null
@@ -90,6 +92,8 @@ class MainActivity : AppCompatActivity() {
 
 
 
+
+
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
     @SuppressLint("InflateParams")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -99,6 +103,8 @@ class MainActivity : AppCompatActivity() {
         navigationView.onNavigationItemSelectedListener = mOnNavigationItemSelectedListener
         mToolbar.title = "MENU"
         setOrderState(true)
+
+        getAllProducts()
 
         isAidl = true
         AidlUtil.getInstance().connectPrinterService(this)
@@ -359,6 +365,7 @@ class MainActivity : AppCompatActivity() {
 
 
     fun setToolbar(isMain: Boolean) {
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_left_arrow)
         supportActionBar?.setDisplayHomeAsUpEnabled(!isMain)
         when {isMain -> {
             arrowNext?.visibility = View.VISIBLE
@@ -366,7 +373,7 @@ class MainActivity : AppCompatActivity() {
         }
             else -> {
                 arrowNext?.visibility = View.GONE
-                arrowBack?.visibility = View.VISIBLE
+                arrowBack?.visibility = View.GONE
             }
         }
     }
@@ -553,6 +560,40 @@ class MainActivity : AppCompatActivity() {
 
         // close the document
         document.close()
+    }
+
+    private fun getAllProducts(){
+        APIRequest.get(this, API.PRODUCTS, object : APIRequest.URLCallback{
+            override fun didUrlResponse(response: String) {
+                Log.i("MainActivity", "getAllProducts: $response")
+                productList = ArrayList()
+
+                try {
+                    val jsonArray = JSONObject(response).getJSONObject("data").getJSONArray("items")
+
+                    for (i in 0 until jsonArray.length()){
+                        val product = Product(jsonArray.getJSONObject(i))
+                        productList.add(product)
+                    }
+
+                    for (items in productList){
+                        productDB?.productDao()?.insert(items)
+                    }
+
+                    if (productList.isNotEmpty()){
+                        //setRecyclerView()
+                        //getSavedCart()
+                    }
+                }catch (e: JSONException){
+                    e.printStackTrace()
+                }
+            }
+
+            override fun didUrlError(error: VolleyError) {
+                showRequestError(error)
+            }
+
+        })
     }
 
 

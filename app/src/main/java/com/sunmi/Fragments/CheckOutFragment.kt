@@ -2,6 +2,7 @@ package com.example.codemagnus.newproject.Fragments
 
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.os.Handler
 import android.support.v4.app.Fragment
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.LinearLayoutManager
@@ -12,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.android.volley.VolleyError
 import com.example.codemagnus.newproject.Adapters.CheckOutRecyclerAdapter
+import com.example.codemagnus.newproject.Session.Session
 import com.mycart.advance.https.API
 import com.mycart.advance.https.APIRequest
 import com.sunmi.Activities.MainActivity
@@ -21,6 +23,7 @@ import com.sunmi.printerhelper.utils.AidlUtil
 import kotlinx.android.synthetic.main.dialog_confirm_checkout.view.*
 import kotlinx.android.synthetic.main.fragment_check_out.*
 import org.json.JSONArray
+import org.json.JSONException
 import org.json.JSONObject
 
 /**
@@ -38,7 +41,6 @@ class CheckOutFragment: Fragment() {
     companion object {
         val TAG:String = CheckOutFragment::class.java.simpleName
         var instance:CheckOutFragment? = CheckOutFragment()
-            fun newInstance(): CheckOutFragment = CheckOutFragment()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,14 +55,13 @@ class CheckOutFragment: Fragment() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         mActivity = context as MainActivity?
         mActivity?.setToolbar(false)
-        mActivity?.setCartState(true)
         setTotalPrice()
 
         if (mActivity?.cart!!.isNotEmpty()){
             tv_empty_cart.visibility    = View.GONE
-            imgcart.visibility         = View.GONE
             adapter                     = CheckOutRecyclerAdapter(context)
             rv_check_out.layoutManager  = LinearLayoutManager(context)
             rv_check_out.adapter        = adapter
@@ -78,11 +79,20 @@ class CheckOutFragment: Fragment() {
 
                 val dialog = alert.create()
                 v.btn_check_now.setOnClickListener{
-                        mActivity!!.newFragment(FragmentReceipt(),FragmentReceipt.TAG)
+                    mActivity!!.newFragment(FragmentReceipt(),FragmentReceipt.TAG)
+                    try {
+                        postCheckOut()
+//                    Handler().postDelayed({
+//                        mActivity!!.newFragment(SuccessFragment(),SuccessFragment.TAG)
+//                    }, 1000)
                         dialog.dismiss()
+                        mActivity!!.removeFragment(FragmentReceipt())
+
+                    }catch (e: Exception){
+                        e.printStackTrace()
+                    }
 
                 }
-
                 dialog.show()
             }
         }
@@ -110,20 +120,25 @@ class CheckOutFragment: Fragment() {
             map["data"] = jsonObj.toString()
             map["id"]   = mActivity?.session?.user()?.id.toString()
 
-            val mapHedear:HashMap<String, String> = HashMap()
-            mapHedear["x-access-token"] = mActivity?.session?.user()!!.token
+            val mapHeader:HashMap<String, String> = HashMap()
+            mapHeader["x-access-token"] = Session(context).getToken()
 
-            APIRequest.postWithToken(context, API.CHECKOUT, mapHedear, map, object : APIRequest.URLCallback{
+            APIRequest.postWithToken(context, API.CHECKOUT, mapHeader, map, object : APIRequest.URLCallback{
                 override fun didUrlResponse(response: String) {
                     Log.i(TAG, "checkout: $response")
                     val json = JSONObject(response)
                     if (json.getBoolean("success")){
-                        mActivity?.newFragment(SuccessFragment(), SuccessFragment.TAG)
+                        Toast.makeText(context,"Transaction Successfully Submitted!",Toast.LENGTH_SHORT).show()
+                        mActivity?.cart = mutableListOf()
+                        mActivity?.setCartCount(0)
+                        mActivity!!.newFragment(SuccessFragment(),SuccessFragment.TAG)
+
                     }
                 }
 
                 override fun didUrlError(error: VolleyError) {
-                    mActivity?.showRequestError(error)
+                    Toast.makeText(context,error.toString(),Toast.LENGTH_LONG).show()
+                    //mActivity?.showRequestError(error)
                 }
 
             })

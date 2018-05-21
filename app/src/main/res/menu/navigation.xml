@@ -10,14 +10,17 @@
 
     <item
         android:id="@+id/navigation_cart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
         android:icon="@drawable/ic_shopping_cart"
-        android:title="Alerts"
-      />
+        app:bb_behavior="iconsOnly"
+        tools:ignore="MenuTitle" />
 
     <item
         android:id="@+id/navigation_profile"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:icon="@drawable/ic_user_silhouette"
         app:bb_behavior="iconsOnly"

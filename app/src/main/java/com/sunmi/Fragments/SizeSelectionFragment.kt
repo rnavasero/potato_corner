@@ -1,9 +1,11 @@
 package com.example.codemagnus.newproject.Fragments
 
+import android.app.AlertDialog
 import android.support.v4.app.Fragment
 import android.os.Build
 import android.os.Bundle
 import android.support.annotation.RequiresApi
+import android.support.v4.app.DialogFragment
 import android.support.v7.widget.GridLayoutManager
 import android.util.Log
 import android.util.Size
@@ -20,7 +22,7 @@ import kotlinx.android.synthetic.main.fragment_size_selection.*
 /**
  * Created by codemagnus on 3/21/18.
  */
-class SizeSelectionFragment: Fragment() {
+class SizeSelectionFragment: DialogFragment() {
 
     private val TAG2 = "#####################"
     private var mActivity: MainActivity? = null

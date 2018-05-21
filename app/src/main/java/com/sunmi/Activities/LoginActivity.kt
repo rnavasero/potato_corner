@@ -62,7 +62,7 @@ class LoginActivity:AppCompatActivity() {
 
     private fun postLogin(email:String, password:String) {
         val params:MutableMap<String, String> = HashMap()
-        params["username"] = email
+        params["email"] = email
         params["password"] = password
         val pDialog: ProgressDialog = ProgressDialog(this@LoginActivity).apply {
             setMessage("Please wait...")

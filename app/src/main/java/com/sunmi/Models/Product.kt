@@ -16,39 +16,49 @@ class Product{
 
     constructor()
 
+
+
     @PrimaryKey(autoGenerate = true)
     var dbId: Int = 0
 
-    @ColumnInfo(name = "productId")
+    @ColumnInfo(name = "id")
     var id: String = ""
 
-    @ColumnInfo(name = "productName")
+    @ColumnInfo(name = "name")
+    var sku: String = ""
+
+    @ColumnInfo(name = "name")
     var name: String = ""
-
-    @ColumnInfo(name = "description")
-    var description: String = ""
-
-    @ColumnInfo(name = "imageUrl")
-    var imgUrl = 0
 
     @ColumnInfo(name = "category")
     var category:String = ""
 
-    @ColumnInfo(name = "flavor")
-    var flavor:String = ""
-
     @ColumnInfo(name = "size")
     var size:String = ""
+
+    @ColumnInfo(name = "flavor")
+    var flavor:String = ""
 
     @ColumnInfo(name = "price")
     var price: Double = 0.00
 
+    @ColumnInfo(name = "image_path")
+    var imgUrl = 0
+
     @ColumnInfo(name = "qty")
     var qty: Int = 0
+
+
 
     constructor(jsonObject: JSONObject){
         id = try {
             jsonObject.getString("id")
+        }catch (e: JSONException){
+            ""
+        }
+
+        sku = try {
+            jsonObject.getString("sku")
         }catch (e: JSONException){
             ""
         }
@@ -59,8 +69,20 @@ class Product{
             ""
         }
 
-        description = try {
-            jsonObject.getString("description")
+        category = try {
+            jsonObject.getString("category")
+        }catch (e: JSONException){
+            ""
+        }
+
+        size = try {
+            jsonObject.getString("size")
+        }catch (e: JSONException){
+            ""
+        }
+
+        flavor = try {
+            jsonObject.getString("flavor")
         }catch (e: JSONException){
             ""
         }
@@ -72,22 +94,42 @@ class Product{
         }
 
         imgUrl = try {
-            jsonObject.getInt("imageUrl")
+            jsonObject.getInt("image_path")
         }catch (e: JSONException){
             0
         }
     }
 
-    constructor(id: String, name: String, description: String, imgUrl: Int, category: String, flavor: String, size: String, price: Double, qty: Int) {
+    constructor(id: String, sku: String, name: String, category: String, size: String, flavor: String, price: Double, imgUrl: Int, qty: Int) {
         this.id = id
+        this.sku = sku
         this.name = name
-        this.description = description
-        this.imgUrl = imgUrl
         this.category = category
-        this.flavor = flavor
         this.size = size
+        this.flavor = flavor
         this.price = price
+        this.imgUrl = imgUrl
         this.qty = qty
+    }
+
+    override fun toString(): String {
+        val jsonObject = JSONObject()
+
+        try {
+            jsonObject.put("id", id)
+            jsonObject.put("sku", sku)
+            jsonObject.put("name", name)
+            jsonObject.put("category", category)
+            jsonObject.put("size", size)
+            jsonObject.put("flavor", flavor)
+            jsonObject.put("price", price)
+            jsonObject.put("image_path", imgUrl)
+
+        } catch (e: JSONException) {
+            e.printStackTrace()
+        }
+
+        return jsonObject.toString()
     }
 
 

@@ -7,6 +7,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import android.widget.Toast
 import com.example.codemagnus.newproject.Fragments.CheckOutFragment
 import com.example.codemagnus.newproject.Fragments.SizeSelectionFragment
 import com.example.codemagnus.newproject.Models.Product
@@ -40,11 +42,12 @@ class ProductAdapter(val mContext:Context?, itemList:MutableList<Product>?):Recy
     open inner class ViewHolder(itemView:View):RecyclerView.ViewHolder(itemView) {
 
         val mActivity = mContext as MainActivity?
-
         fun bindHolderbyPosition(position: Int){
             val item = items!![position]
             itemView.tv_item_name.text = item.name
-            Picasso.with(mContext).load(item.imgUrl).resize(260,260).centerCrop().into(itemView.iv_item_content)
+            //Picasso.with(mContext).load(item.imgUrl).resize(260,260).centerCrop().into(itemView.iv_item_content)
+
+
 
             itemView.iv_item_content.setOnClickListener {
 
@@ -79,4 +82,5 @@ class ProductAdapter(val mContext:Context?, itemList:MutableList<Product>?):Recy
         }
 
     }
+
 }
