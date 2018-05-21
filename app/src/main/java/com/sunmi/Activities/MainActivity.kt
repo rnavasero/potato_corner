@@ -46,6 +46,7 @@ import com.example.codemagnus.newproject.Models.StaticSizeData
 import com.example.codemagnus.newproject.Session.Session
 import com.mycart.advance.https.API
 import com.mycart.advance.https.APIRequest
+import com.sunmi.Fragments.ProfileFragment
 import com.sunmi.printerhelper.R
 import com.sunmi.printerhelper.utils.AidlUtil
 import kotlinx.android.synthetic.main.activity_main.*
@@ -260,7 +261,7 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.navigation_profile -> {
                 setReceiptState(true)
-                val toFragment = SuccessFragment.newInstance()
+                val toFragment = ProfileFragment.newInstance()
                 openFragment(toFragment)
                 return@OnNavigationItemSelectedListener true
             }
@@ -339,7 +340,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun logout(){
+    fun logout(){
 
         val pDialog: ProgressDialog = ProgressDialog(this@MainActivity).apply {
             setMessage("Please wait...")

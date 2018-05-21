@@ -81,7 +81,7 @@ object APIRequest {
         }){
             override fun getHeaders(): MutableMap<String, String> {
                 val token:MutableMap<String, String> = HashMap()
-                token["x-access-token"] = Session(context).getToken()
+                token["x-access-token"] = Session(context).user().token
                 return token
             }
 

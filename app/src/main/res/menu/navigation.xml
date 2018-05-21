@@ -14,8 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:icon="@drawable/ic_shopping_cart"
-        app:bb_behavior="iconsOnly"
-        tools:ignore="MenuTitle" />
+        android:title="Cart"/>
 
     <item
         android:id="@+id/navigation_profile"
@@ -23,7 +22,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:icon="@drawable/ic_user_silhouette"
-        app:bb_behavior="iconsOnly"
-        tools:ignore="MenuTitle" />
+        android:title="Profile"/>
 
 </menu>

@@ -44,8 +44,8 @@ class ProductAdapter(val mContext:Context?, itemList:MutableList<Product>?):Recy
         val mActivity = mContext as MainActivity?
         fun bindHolderbyPosition(position: Int){
             val item = items!![position]
-            itemView.tv_item_name.text = item.name
-            //Picasso.with(mContext).load(item.imgUrl).resize(260,260).centerCrop().into(itemView.iv_item_content)
+            itemView.tv_item_name.text = item.flavor
+            Picasso.with(mContext).load(item.imgUrl).resize(260,260).centerCrop().into(itemView.iv_item_content)
 
 
 

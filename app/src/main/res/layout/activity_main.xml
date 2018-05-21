@@ -60,7 +60,7 @@
             android:layout_height="0dp"
             android:layout_marginEnd="2dp"
             android:layout_marginStart="2dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="22dp"
             app:layout_constraintBottom_toTopOf="@+id/navigationView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -83,6 +83,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="8dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="2dp"
                     android:text="BEST FLAVORED FRIES"
@@ -92,8 +93,7 @@
                     android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@+id/main_frame1"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:layout_marginLeft="8dp" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <FrameLayout
                     android:id="@+id/main_frame1"
@@ -126,6 +126,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="8dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="5dp"
                     android:text="FANCY FRIES"
@@ -135,8 +136,7 @@
                     android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@+id/main_frame2"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/main_frame1"
-                    android:layout_marginLeft="8dp" />
+                    app:layout_constraintTop_toBottomOf="@+id/main_frame1" />
 
                 <FrameLayout
                     android:id="@+id/main_frame2"
@@ -187,6 +187,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="8dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="5dp"
                     android:text="BEVERAGES"
@@ -196,8 +197,7 @@
                     android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@+id/main_frame3"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/main_frame2"
-                    android:layout_marginLeft="8dp" />
+                    app:layout_constraintTop_toBottomOf="@+id/main_frame2" />
 
 
             </android.support.constraint.ConstraintLayout>

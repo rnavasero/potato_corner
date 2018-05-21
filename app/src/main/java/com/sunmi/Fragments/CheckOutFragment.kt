@@ -17,13 +17,10 @@ import com.example.codemagnus.newproject.Session.Session
 import com.mycart.advance.https.API
 import com.mycart.advance.https.APIRequest
 import com.sunmi.Activities.MainActivity
-import com.sunmi.Fragments.FragmentReceipt
 import com.sunmi.printerhelper.R
 import com.sunmi.printerhelper.utils.AidlUtil
-import kotlinx.android.synthetic.main.dialog_confirm_checkout.view.*
 import kotlinx.android.synthetic.main.fragment_check_out.*
 import org.json.JSONArray
-import org.json.JSONException
 import org.json.JSONObject
 
 /**
@@ -41,6 +38,7 @@ class CheckOutFragment: Fragment() {
     companion object {
         val TAG:String = CheckOutFragment::class.java.simpleName
         var instance:CheckOutFragment? = CheckOutFragment()
+        fun newInstance(): CheckOutFragment = CheckOutFragment()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -67,35 +65,35 @@ class CheckOutFragment: Fragment() {
             rv_check_out.adapter        = adapter
         }
 
-        btn_checkout.setOnClickListener {
-            if (mActivity?.cart!!.isEmpty()){
-                Toast.makeText(context, getString(R.string.no_item_to_check_out), Toast.LENGTH_SHORT).show()
-            }else{
-                val alert = AlertDialog.Builder(context)
-                val v = LayoutInflater.from(context).inflate(R.layout.dialog_confirm_checkout, null)
-                alert.setView(v)
-
-                v.tv_confirm_total_price.text = mTotal
-
-                val dialog = alert.create()
-                v.btn_check_now.setOnClickListener{
-                    mActivity!!.newFragment(FragmentReceipt(),FragmentReceipt.TAG)
-                    try {
-                        postCheckOut()
-//                    Handler().postDelayed({
-//                        mActivity!!.newFragment(SuccessFragment(),SuccessFragment.TAG)
-//                    }, 1000)
-                        dialog.dismiss()
-                        mActivity!!.removeFragment(FragmentReceipt())
-
-                    }catch (e: Exception){
-                        e.printStackTrace()
-                    }
-
-                }
-                dialog.show()
-            }
-        }
+//        btn_checkout.setOnClickListener {
+//            if (mActivity?.cart!!.isEmpty()){
+//                Toast.makeText(context, getString(R.string.no_item_to_check_out), Toast.LENGTH_SHORT).show()
+//            }else{
+//                val alert = AlertDialog.Builder(context)
+//                val v = LayoutInflater.from(context).inflate(R.layout.dialog_confirm_checkout, null)
+//                alert.setView(v)
+//
+//                v.tv_confirm_total_price.text = mTotal
+//
+//                val dialog = alert.create()
+//                v.btn_check_now.setOnClickListener{
+//                    mActivity!!.newFragment(FragmentReceipt(),FragmentReceipt.TAG)
+//                    try {
+//                        postCheckOut()
+////                    Handler().postDelayed({
+////                        mActivity!!.newFragment(SuccessFragment(),SuccessFragment.TAG)
+////                    }, 1000)
+//                        dialog.dismiss()
+//                        mActivity!!.removeFragment(FragmentReceipt())
+//
+//                    }catch (e: Exception){
+//                        e.printStackTrace()
+//                    }
+//
+//                }
+//                dialog.show()
+//            }
+//        }
 
 
     }
@@ -155,7 +153,7 @@ class CheckOutFragment: Fragment() {
 
         mTotal = String.format ("P %.2f", total.toFloat())
 
-        btn_checkout.isEnabled = total > 0
+        //btn_checkout.isEnabled = total > 0
         tv_checkout_total_price.text = mTotal
     }
 

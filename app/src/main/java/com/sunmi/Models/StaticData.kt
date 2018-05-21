@@ -30,7 +30,7 @@ class StaticData {
                     "",
                     "Barbeque",
                     0.00,
-                    0,
+                    R.drawable.cheese,
                     0
             ))
             product.add(Product(
@@ -41,7 +41,7 @@ class StaticData {
                     "",
                     "Salted Caramel",
                     0.00,
-                    0,
+                    R.drawable.cheese,
                     0
             ))
             product.add(Product(
@@ -52,7 +52,7 @@ class StaticData {
                     "",
                     "Wasabi",
                     0.00,
-                    0,
+                    R.drawable.cheese,
                     0
             ))
             product.add(Product(
@@ -63,7 +63,7 @@ class StaticData {
                     "",
                     "Sour & Cream",
                     0.00,
-                    0,
+                    R.drawable.cheese,
                     0
             ))
             product.add(Product(
@@ -74,7 +74,7 @@ class StaticData {
                     " Fries",
                     "Chili Barbeque",
                     0.00,
-                    0,
+                    R.drawable.cheese,
                     0
             ))
             product.add(Product(
@@ -85,7 +85,7 @@ class StaticData {
                     "",
                     "Garlic Parmesan",
                     0.00,
-                    0,
+                    R.drawable.cheese,
                     0
             ))
             product.add(Product(
@@ -96,7 +96,7 @@ class StaticData {
                     "Flavored Fries",
                     "Cinnamon $ Sugar",
                     0.00,
-                    0,
+                    R.drawable.cheese,
                     0
             ))
             return product
@@ -114,7 +114,7 @@ class StaticData {
                     "",
                     "",
                     0.00,
-                    0,
+                    R.drawable.softdrinks,
                     0
 
             ))
@@ -128,7 +128,7 @@ class StaticData {
                     "",
                     "",
                     0.00,
-                    0,
+                    R.drawable.icedtead,
                     0
             ))
 
@@ -141,7 +141,7 @@ class StaticData {
                     "Beverages",
                     "Cinnamon $ Sugar",
                     0.00,
-                    0,
+                    R.drawable.water,
                     0
             ))
 
@@ -153,7 +153,7 @@ class StaticData {
                     "",
                     "",
                     0.00,
-                    0,
+                    R.drawable.minutemaid,
                     0
             ))
 
@@ -172,7 +172,7 @@ class StaticData {
                     "",
                     "",
                     0.00,
-                    0,
+                    R.drawable.loopyfries,
                     0
             ))
 
@@ -185,7 +185,7 @@ class StaticData {
                     "",
                     "",
                     0.00,
-                    0,
+                    R.drawable.hashbrown,
                     0
             ))
 
@@ -198,7 +198,7 @@ class StaticData {
                     "Fancy Fries",
                     "",
                     0.00,
-                    0,
+                    R.drawable.jojos,
                     0
             ))
 
@@ -210,7 +210,7 @@ class StaticData {
                     "Fancy Fries",
                     "",
                     0.00,
-                    0,
+                    R.drawable.cheese,
                     0
             ))
 
