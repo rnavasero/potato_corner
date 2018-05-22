@@ -112,6 +112,8 @@ class MainActivity : AppCompatActivity() {
         getAllProducts()
         getProductSize()
 
+        Log.i(TAG2,productSizeList.toString())
+
         isAidl = true
         AidlUtil.getInstance().connectPrinterService(this)
         //fn_permission()
@@ -135,6 +137,11 @@ class MainActivity : AppCompatActivity() {
         mToolbar.addView(arrowNext, 1, Toolbar.LayoutParams(Gravity.END))
         cartCheckout = layoutInflater.inflate(R.layout.layout_checkout, null)
         mToolbar.addView(cartCheckout, 2, Toolbar.LayoutParams(Gravity.END))
+
+        cartCheckout?.setOnClickListener {
+
+            newFragment(SuccessFragment(), SuccessFragment.TAG)
+        }
 
 
 

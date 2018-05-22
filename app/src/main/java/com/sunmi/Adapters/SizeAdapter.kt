@@ -81,7 +81,7 @@ class SizeAdapter(val mContext:Context,var category:String?, var flavor:String?,
                         item.name = c!!
                         item.qty = 1
                         item.size = size
-                        item.imgUrl = R.drawable.cheese
+                        item.imgUrl = image
                         SizeSelectionFragment().newInstance(item)
 
                     }
@@ -93,7 +93,7 @@ class SizeAdapter(val mContext:Context,var category:String?, var flavor:String?,
                         item.name = c
                         item.qty = 1
                         item.size = size
-                        item.imgUrl = R.drawable.cheese
+                        item.imgUrl = image
                         SizeSelectionFragment().newInstance(item)
                     }
 
@@ -104,7 +104,7 @@ class SizeAdapter(val mContext:Context,var category:String?, var flavor:String?,
                         item.name = c
                         item.qty = 1
                         item.size = size
-                        item.imgUrl = R.drawable.cheese
+                        item.imgUrl = image
                         SizeSelectionFragment().newInstance(item)
                     }
 
@@ -115,7 +115,7 @@ class SizeAdapter(val mContext:Context,var category:String?, var flavor:String?,
                         item.name = c
                         item.qty = 1
                         item.size = size
-                        item.imgUrl = R.drawable.cheese
+                        item.imgUrl = image
                         SizeSelectionFragment().newInstance(item)
                     }
 
@@ -126,7 +126,7 @@ class SizeAdapter(val mContext:Context,var category:String?, var flavor:String?,
                         item.name = c
                         item.qty = 1
                         item.size = size
-                        item.imgUrl = R.drawable.cheese
+                        item.imgUrl = image
                         SizeSelectionFragment().newInstance(item)
                     }
 
@@ -137,23 +137,50 @@ class SizeAdapter(val mContext:Context,var category:String?, var flavor:String?,
                         item.name = c
                         item.qty = 1
                         item.size = size
-                        item.imgUrl = R.drawable.cheese
+                        item.imgUrl = image
                         SizeSelectionFragment().newInstance(item)
                     }
                 }
-                mActivity!!.cart.add(Product(item.id, item.sku, item.name, item.category, item.size,item.flavor,item.price,item.imgUrl,item.qty))
-                mActivity!!.setCartCount(mActivity!!.productCount+1)
+
+
+                Log.i(TAG2,item.id)
+                checkProduct(item)
+                if(mActivity!!.itemCheck){
+                    updateCart(item)
+                }
+                else
+                {
+                    mActivity!!.cart.add(Product(item.id, item.sku, item.name, item.category, item.size,item.flavor,item.price,R.drawable.cheese,item.qty))
+                    mActivity!!.setCartCount(mActivity!!.productCount+1)
+                }
                 SizeSelectionFragment().newInstance(item)
                 mActivity!!.setCartState(true)
                 mActivity!!.newFragment(CheckOutFragment(),CheckOutFragment.TAG)
-                Log.i(TAG2,item.toString())
-
+                mActivity!!.itemCheck = false
 
             }
 
 
 
 
+        }
+
+        private fun checkProduct(product: Product){
+            for (i in 0 until mActivity!!.cart.size){
+                if (mActivity!!.cart[i].id == product.id){
+                    mActivity!!.itemCheck = true
+                }
+            }
+        }
+
+        private fun updateCart(product: Product){
+            for (i in 0 until mActivity!!.cart.size){
+                if (mActivity!!.cart[i].id == product.id){
+                    mActivity!!.cart[i].qty += 1
+                    mActivity!!.setCartCount(mActivity!!.productCount+1)
+                    notifyItemChanged(i)
+                }
+            }
         }
 
 
