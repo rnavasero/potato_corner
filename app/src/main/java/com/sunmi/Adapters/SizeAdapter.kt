@@ -71,94 +71,111 @@ class SizeAdapter(val mContext:Context,var category:String?, var flavor:String?,
 
             Picasso.with(mContext).load(item.imgUrl).resize(150,150   ).centerCrop().into(itemView.iv_item_content2)
 
-            itemView.cv_item2.setOnClickListener{
-
-                when (item.size){
-                    "Regular"->{
-                        item.id = "${itemID.toString()}1"
-                        item.category = "Flavored Fries"
-                        item.flavor = f!!
-                        item.name = c!!
-                        item.qty = 1
-                        item.size = size
-                        item.imgUrl = image
-                        SizeSelectionFragment().newInstance(item)
-
-                    }
-
-                    "Large"->{
-                        item.id = "${itemID.toString()}2"
-                        item.category = c!!
-                        item.flavor = f!!
-                        item.name = c
-                        item.qty = 1
-                        item.size = size
-                        item.imgUrl = image
-                        SizeSelectionFragment().newInstance(item)
-                    }
-
-                    "Jumbo"->{
-                        item.id = "${itemID.toString()}3"
-                        item.category = c!!
-                        item.flavor = f!!
-                        item.name = c
-                        item.qty = 1
-                        item.size = size
-                        item.imgUrl = image
-                        SizeSelectionFragment().newInstance(item)
-                    }
-
-                    "Mega"->{
-                        item.id = "${itemID.toString()}4"
-                        item.category = c!!
-                        item.flavor = f!!
-                        item.name = c
-                        item.qty = 1
-                        item.size = size
-                        item.imgUrl = image
-                        SizeSelectionFragment().newInstance(item)
-                    }
-
-                    "Giga"->{
-                        item.id = "${itemID.toString()}5"
-                        item.category = c!!
-                        item.flavor = f!!
-                        item.name = c
-                        item.qty = 1
-                        item.size = size
-                        item.imgUrl = image
-                        SizeSelectionFragment().newInstance(item)
-                    }
-
-                    "Terra"->{
-                        item.id = "${itemID.toString()}6"
-                        item.category = c!!
-                        item.flavor = f!!
-                        item.name = c
-                        item.qty = 1
-                        item.size = size
-                        item.imgUrl = image
-                        SizeSelectionFragment().newInstance(item)
-                    }
-                }
-
-
-                Log.i(TAG2,item.id)
-                checkProduct(item)
-                if(mActivity!!.itemCheck){
-                    updateCart(item)
-                }
-                else
-                {
-                    mActivity!!.cart.add(Product(item.id, item.sku, item.name, item.category, item.size,item.flavor,item.price,R.drawable.cheese,item.qty))
-                    mActivity!!.setCartCount(mActivity!!.productCount+1)
-                }
-                SizeSelectionFragment().newInstance(item)
-                mActivity!!.setCartState(true)
-                mActivity!!.newFragment(CheckOutFragment(),CheckOutFragment.TAG)
-                mActivity!!.itemCheck = false
-
+            itemView.cv_item2.setOnClickListener {
+                Toast.makeText(mContext,"Short Clicked! ${position}", Toast.LENGTH_SHORT).show()
+                item.qty += 1
+                mActivity!!.setCartCount(mActivity!!.productCount + 1)
+                updated(item)
             }
+
+            itemView.cv_item2.setOnLongClickListener {
+                Toast.makeText(mContext,"Long Clicked!", Toast.LENGTH_SHORT).show()
+                item.qty -= 1
+                mActivity!!.setCartCount(mActivity!!.productCount - 1)
+                updated(item)
+                return@setOnLongClickListener true
+            }
+
+
+//
+//            itemView.cv_item2.setOnClickListener{
+//
+//                when (item.size){
+//                    "Regular"->{
+//                        item.id = "${itemID.toString()}1"
+//                        item.category = "Flavored Fries"
+//                        item.flavor = f!!
+//                        item.name = c!!
+//                        item.qty = 1
+//                        item.size = size
+//                        item.imgUrl = image
+//                        SizeSelectionFragment().newInstance(item)
+//
+//                    }
+//
+//                    "Large"->{
+//                        item.id = "${itemID.toString()}2"
+//                        item.category = c!!
+//                        item.flavor = f!!
+//                        item.name = c
+//                        item.qty = 1
+//                        item.size = size
+//                        item.imgUrl = image
+//                        SizeSelectionFragment().newInstance(item)
+//                    }
+//
+//                    "Jumbo"->{
+//                        item.id = "${itemID.toString()}3"
+//                        item.category = c!!
+//                        item.flavor = f!!
+//                        item.name = c
+//                        item.qty = 1
+//                        item.size = size
+//                        item.imgUrl = image
+//                        SizeSelectionFragment().newInstance(item)
+//                    }
+//
+//                    "Mega"->{
+//                        item.id = "${itemID.toString()}4"
+//                        item.category = c!!
+//                        item.flavor = f!!
+//                        item.name = c
+//                        item.qty = 1
+//                        item.size = size
+//                        item.imgUrl = image
+//                        SizeSelectionFragment().newInstance(item)
+//                    }
+//
+//                    "Giga"->{
+//                        item.id = "${itemID.toString()}5"
+//                        item.category = c!!
+//                        item.flavor = f!!
+//                        item.name = c
+//                        item.qty = 1
+//                        item.size = size
+//                        item.imgUrl = image
+//                        SizeSelectionFragment().newInstance(item)
+//                    }
+//
+//                    "Terra"->{
+//                        item.id = "${itemID.toString()}6"
+//                        item.category = c!!
+//                        item.flavor = f!!
+//                        item.name = c
+//                        item.qty = 1
+//                        item.size = size
+//                        item.imgUrl = image
+//                        SizeSelectionFragment().newInstance(item)
+//                    }
+//                }
+//
+//
+//                Log.i(TAG2,item.id)
+//                checkProduct(item)
+//                if(mActivity!!.itemCheck){
+//                    updateCart(item)
+//                }
+//                else
+//                {
+//                    mActivity!!.cart.add(Product(item.id, item.sku, item.name, item.category, item.size,item.flavor,item.price,R.drawable.cheese,item.qty))
+//                    mActivity!!.setCartCount(mActivity!!.productCount+1)
+//                }
+//                SizeSelectionFragment().newInstance(item)
+//                mActivity!!.setCartState(true)
+//                mActivity!!.newFragment(CheckOutFragment(),CheckOutFragment.TAG)
+//                mActivity!!.itemCheck = false
+//
+//            }
 
 
 
@@ -181,6 +198,32 @@ class SizeAdapter(val mContext:Context,var category:String?, var flavor:String?,
                     notifyItemChanged(i)
                 }
             }
+        }
+
+        private fun updated(product: Product){
+//            itemView.et_product_qty.text           = product.qty.toString()
+//            itemView.img_minus_product.visibility  = if (product.qty > 0) View.VISIBLE else View.GONE
+//            itemView.et_product_qty.visibility     = if (product.qty > 0) View.VISIBLE else View.GONE
+
+            Thread(Runnable {
+                if (product.qty > 0){
+                    if (!mActivity!!.cart.contains(product)){
+                        if (product.qty == 1){
+                            mActivity!!.cart.add(product)
+                        }else{
+                            (0 until mActivity!!.cart.size)
+                                    .filter { mActivity!!.cart[it].id == product.id }
+                                    .forEach {
+                                        mActivity!!.cart[it] = product
+                                    }
+                        }
+                    }
+                }else{
+                    if (mActivity!!.cart.contains(product)){
+                        mActivity!!.cart.remove(product)
+                    }
+                }
+            }).start()
         }
 
 

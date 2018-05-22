@@ -20,7 +20,7 @@ abstract class ProductDataBase : RoomDatabase() {
             if (INSTANCE == null) {
                 synchronized(ProductDataBase::class){
                     INSTANCE = Room.databaseBuilder(context.applicationContext,
-                            ProductDataBase::class.java, "mycart_adavance.db").build()
+                            ProductDataBase::class.java, "potato_corner.db").build()
                 }
             }
             return INSTANCE as ProductDataBase

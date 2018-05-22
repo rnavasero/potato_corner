@@ -27,6 +27,7 @@
                 android:minHeight="?attr/actionBarSize"
                 app:popupTheme="@style/Base.AppTheme.PopupOverlay"/>
 
+
         </android.support.design.widget.AppBarLayout>
 
         <View
@@ -53,6 +54,13 @@
             app:layout_constraintTop_toBottomOf="@+id/appBarLayout2"
             tools:ignore="MissingConstraints" />
 
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+        </ScrollView>
+
         <FrameLayout
 
             android:id="@+id/main_frame"
@@ -60,12 +68,12 @@
             android:layout_height="0dp"
             android:layout_marginEnd="2dp"
             android:layout_marginStart="2dp"
-            android:layout_marginTop="22dp"
+            android:layout_marginTop="65dp"
             app:layout_constraintBottom_toTopOf="@+id/navigationView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView13">
+            app:layout_constraintTop_toBottomOf="@+id/appBarLayout2">
 
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
@@ -187,10 +195,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
-                    android:layout_marginLeft="8dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="5dp"
-                    android:text="BEVERAGES"
+                    android:text="DRINKS"
                     android:textAlignment="center"
                     android:textColor="#2d2b2b"
                     android:textSize="16dp"

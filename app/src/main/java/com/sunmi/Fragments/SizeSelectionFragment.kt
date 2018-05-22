@@ -58,7 +58,7 @@ class SizeSelectionFragment: DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         mActivity = context as MainActivity?
-        mActivity?.setToolbar(false)
+        mActivity?.setToolbar(true)
         adapter = SizeAdapter(context, category,flavor, i_id)
         mAdapter = SizeSelectAdapter(context, category, i_image, n_name, i_id)
 

@@ -104,15 +104,13 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        productDB = ProductDataBase.init(this@MainActivity)
+        productDB = ProductDataBase.init(this)
         navigationView.onNavigationItemSelectedListener = mOnNavigationItemSelectedListener
         mToolbar.title = "MENU"
         setOrderState(true)
 
         getAllProducts()
         getProductSize()
-
-        Log.i(TAG2,productSizeList.toString())
 
         isAidl = true
         AidlUtil.getInstance().connectPrinterService(this)
@@ -557,13 +555,18 @@ class MainActivity : AppCompatActivity() {
                         productSizeList.add(product)
                     }
 
+                    Log.i(TAG2, productSizeList.toString())
+
+                    if (productSizeList.isNotEmpty()){
+                        //setRecyclerView()
+                        //getSavedCart()
+                    }
+
                 }catch (e: JSONException){
                     e.printStackTrace()
                 }
 
-//                for (items in productList){
-//                    productDB?.productDao()?.insert(items)
-//                }
+
             }
 
             override fun didUrlError(error: VolleyError) {

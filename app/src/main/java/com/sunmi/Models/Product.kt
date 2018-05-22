@@ -9,13 +9,10 @@ import org.json.JSONObject
 /**
  * Created by CDI on 2/23/18
  */
-@Entity(tableName = "cartData")
+@Entity(tableName = "productData")
 class Product{
 
     constructor()
-
-
-
     var dbId: Int = 0
 
     @PrimaryKey(autoGenerate = true)

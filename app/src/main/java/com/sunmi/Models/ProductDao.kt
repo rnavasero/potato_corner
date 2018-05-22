@@ -8,7 +8,7 @@ import android.arch.persistence.room.*
 @Dao
 interface ProductDao {
 
-    @Query ("SELECT * FROM cartData")
+    @Query ("SELECT * FROM productData")
     fun loadAll(): List<Product>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
@@ -17,7 +17,7 @@ interface ProductDao {
     @Delete
     fun delete(product: Product)
 
-    @Query("DELETE FROM cartData")
+    @Query("DELETE FROM productData")
     fun deleteAll()
 
     @Update
