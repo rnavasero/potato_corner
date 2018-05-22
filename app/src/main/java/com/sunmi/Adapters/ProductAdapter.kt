@@ -23,7 +23,7 @@ import kotlinx.android.synthetic.main.category_content.view.*
  */
 class ProductAdapter(val mContext:Context?, itemList:MutableList<Product>?):RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
 
-    private val TAG2 = "#####################"
+    private val TAG2 = "###"
     val items = itemList
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
@@ -44,15 +44,15 @@ class ProductAdapter(val mContext:Context?, itemList:MutableList<Product>?):Recy
         val mActivity = mContext as MainActivity?
         fun bindHolderbyPosition(position: Int){
             val item = items!![position]
-            itemView.tv_item_name.text = item.flavor
+            itemView.tv_item_name.text = item.name
             Picasso.with(mContext).load(item.imgUrl).resize(260,260).centerCrop().into(itemView.iv_item_content)
 
 
 
-            itemView.iv_item_content.setOnClickListener {
+            itemView.fl_product_select.setOnClickListener {
 
-                if (item.category != "Flavored Fries") {
-                    if (item.category == "Fancy Fries"){
+                if (item.category != "FLAVORED FRIES") {
+                    if (item.category == "FANCY FRIES"){
                         SizeSelectionFragment.category = item.category
                         SizeSelectionFragment.i_id = item.id
                         SizeSelectionFragment.n_name = item.name
@@ -61,7 +61,7 @@ class ProductAdapter(val mContext:Context?, itemList:MutableList<Product>?):Recy
                         Log.i(TAG2,item.toString())
                         mActivity?.newFragment(SizeSelectionFragment(), SizeSelectionFragment.TAG)
 
-                    } else if (item.category == "Beverages"){
+                    } else if (item.category == "DRINKS"){
                         SizeSelectionFragment.category = item.category
                         SizeSelectionFragment.i_id = item.id
                         SizeSelectionFragment.n_name = item.name

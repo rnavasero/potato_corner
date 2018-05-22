@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.row_item_receipt.view.*
  */
 open class ReceiptItemRecyclerAdapter(private val mContext:Context):RecyclerView.Adapter<ReceiptItemRecyclerAdapter.RViewHolder>() {
 
-    private val TAG2 = "#####################"
+    private val TAG2 = "###"
     private var mActivity: MainActivity? = null
 
     init {

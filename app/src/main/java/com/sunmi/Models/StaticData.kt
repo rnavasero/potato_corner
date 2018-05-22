@@ -14,91 +14,91 @@ class StaticData {
             product.add(Product(
                     "100",
                     "f11",
-                    "Flavored Fries Cheddar",
+                    "CHEDDAR",
                     "FLAVORED FRIES",
                     "",
-                    "Cheddar",
+                    "CHEDDAR",
                     0.00,
                     R.drawable.cheese,
-                    0
+                    1
 
             ))
             product.add(Product(
                     "200",
                     "f12",
-                    "Flavored Fries Barbeque",
+                    "BARBEQUE",
                     "FLAVORED FRIES",
                     "",
-                    "Barbeque",
+                    "BARBEQUE",
                     0.00,
                     R.drawable.cheese,
-                    0
+                    1
             ))
             product.add(Product(
                     "300",
                     "f13",
-                    "Flavored Fries Salted Caramel",
+                    "SALTED CARAMEL",
                     "FLAVORED FRIES",
                     "",
-                    "Salted Caramel",
+                    "SALTED CARAMEL",
                     0.00,
                     R.drawable.cheese,
-                    0
+                    1
             ))
             product.add(Product(
                     "400",
                     "f14",
-                    "Flavored Fries Wasabi",
+                    "WASABI",
                     "FLAVORED FRIES",
                     "",
-                    "Wasabi",
+                    "WASABI",
                     0.00,
                     R.drawable.cheese,
-                    0
+                    1
             ))
             product.add(Product(
                     "500",
                     "f15",
-                    "Flavored Fries Sour & Cream",
+                    "SOUR CREAM",
                     "FLAVORED FRIES",
                     "",
-                    "Sour & Cream",
+                    "SOUR CREAM",
                     0.00,
                     R.drawable.cheese,
-                    0
+                    1
             ))
             product.add(Product(
                     "600",
                     "f16",
-                    "Flavored Fries Chili Barbeque",
+                    "CHILI BARBEQUE",
                     "FLAVORED FRIES",
                     " Fries",
-                    "Chili Barbeque",
+                    "CHILI BARBEQUE",
                     0.00,
                     R.drawable.cheese,
-                    0
+                    1
             ))
             product.add(Product(
                     "700",
                     "f17",
-                    "Flavored Fries Garlic Parmesan",
+                    "GARLIC PARMESAN",
                     "FLAVORED FRIES",
                     "",
-                    "Garlic Parmesan",
+                    "GARLIC PARMESAN",
                     0.00,
                     R.drawable.cheese,
-                    0
+                    1
             ))
             product.add(Product(
                     "800",
                     "f18",
-                    "Flavored Fries Cinnamon & Sugar",
+                    "CINNAMON & SUGAR",
                     "FLAVORED FRIES",
-                    "Flavored Fries",
-                    "Cinnamon $ Sugar",
+                    "",
+                    "CINNAMON & SUGAR",
                     0.00,
                     R.drawable.cheese,
-                    0
+                    1
             ))
             return product
 
@@ -110,7 +110,7 @@ class StaticData {
             product.add(Product(
                     "900",
                     "f19",
-                    "Softdrinks",
+                    "SOFTDRINKS",
                     "DRINKS",
                     "",
                     "",
@@ -124,7 +124,7 @@ class StaticData {
             product.add(Product(
                     "1000",
                     "f20",
-                    "Iced Tea",
+                    "ICED TEA",
                     "DRINKS",
                     "",
                     "",
@@ -137,10 +137,10 @@ class StaticData {
             product.add(Product(
                     "1100",
                     "f21",
-                    "Bottled Water",
+                    "BOTTLED WATER",
                     "DRINKS",
-                    "Beverages",
-                    "Cinnamon $ Sugar",
+                    "",
+                    "",
                     0.00,
                     R.drawable.water,
                     0
@@ -149,7 +149,7 @@ class StaticData {
             product.add(Product(
                     "1200",
                     "f22",
-                    "Minute Maid",
+                    "MINUTE MAID",
                     "DRINKS",
                     "",
                     "",
@@ -168,7 +168,7 @@ class StaticData {
             product.add(Product(
                     "1300",
                     "f23",
-                    "Loopy Fries",
+                    "LOOPY FRIES",
                     "FANCY FRIES",
                     "",
                     "",
@@ -181,7 +181,7 @@ class StaticData {
             product.add(Product(
                     "1400",
                     "f24",
-                    "Hash Brown",
+                    "HASH BROWN",
                     "FANCY FRIES",
                     "",
                     "",
@@ -194,9 +194,9 @@ class StaticData {
             product.add(Product(
                     "1500",
                     "f25",
-                    "Jojos",
+                    "JOJOS",
                     "FANCY FRIES",
-                    "Fancy Fries",
+                    "",
                     "",
                     0.00,
                     R.drawable.jojos,
@@ -206,9 +206,9 @@ class StaticData {
             product.add(Product(
                     "1600",
                     "f26",
-                    "Cheezy Fries",
+                    "CHEEZY FRIES",
                     "FANCY FRIES",
-                    "Fancy Fries",
+                    "",
                     "",
                     0.00,
                     R.drawable.cheese,
@@ -231,7 +231,7 @@ class StaticData {
                     "",
                     0.00,
                     0,
-                    0
+                    1
             ))
 
 
@@ -244,7 +244,7 @@ class StaticData {
                     "",
                     0.00,
                     0,
-                    0
+                    1
             ))
 
 
@@ -257,7 +257,7 @@ class StaticData {
                     "",
                     0.00,
                     0,
-                    0
+                    1
             ))
 
             return product

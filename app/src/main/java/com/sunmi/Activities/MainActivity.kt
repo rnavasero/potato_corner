@@ -44,9 +44,7 @@ import com.example.codemagnus.newproject.Session.Session
 import com.mycart.advance.https.API
 import com.mycart.advance.https.APIRequest
 import com.sunmi.Fragments.ProfileFragment
-import com.sunmi.Models.Product
-import com.sunmi.Models.ProductDataBase
-import com.sunmi.Models.StaticData
+import com.sunmi.Models.*
 import com.sunmi.printerhelper.R
 import com.sunmi.printerhelper.utils.AidlUtil
 import kotlinx.android.synthetic.main.activity_main.*
@@ -69,8 +67,10 @@ class MainActivity : AppCompatActivity() {
     var mAdapter = CheckOutRecyclerAdapter(this)
     var arrowBack: View? = null
     var arrowNext: View? = null
+    var cartCheckout: View? = null
     var cart: MutableList<Product> = mutableListOf()
     var productList: MutableList<Product> = mutableListOf()
+    var productSizeList:MutableList<ProductSize> = mutableListOf()
     private var cartView: View? = null
     var fm: FragmentManager? = null
     var session: Session? = null
@@ -110,6 +110,7 @@ class MainActivity : AppCompatActivity() {
         setOrderState(true)
 
         getAllProducts()
+        getProductSize()
 
         isAidl = true
         AidlUtil.getInstance().connectPrinterService(this)
@@ -122,16 +123,18 @@ class MainActivity : AppCompatActivity() {
 
 
         fm = supportFragmentManager
-        staticData = StaticData.getlists()
+        staticData = StaticSizeData.getlists()
         sData = StaticData.getlists4()
         sData2 = StaticData.getlists2()
         sData3 = StaticData.getlists3()
         setSupportActionBar(mToolbar)
 
-        arrowBack = layoutInflater.inflate(R.layout.menu, null)
-        mToolbar.addView(arrowBack, 0, Toolbar.LayoutParams(Gravity.START))
+//        arrowBack = layoutInflater.inflate(R.layout.menu, null)
+//        mToolbar.addView(arrowBack, 0, Toolbar.LayoutParams(Gravity.START))
         arrowNext = layoutInflater.inflate(R.layout.layout_arrow_right, null)
         mToolbar.addView(arrowNext, 1, Toolbar.LayoutParams(Gravity.END))
+        cartCheckout = layoutInflater.inflate(R.layout.layout_checkout, null)
+        mToolbar.addView(cartCheckout, 2, Toolbar.LayoutParams(Gravity.END))
 
 
 
@@ -159,88 +162,6 @@ class MainActivity : AppCompatActivity() {
 
         rv_main3.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         rv_main3.adapter = ProductAdapter(this, StaticData.getlists2())
-
-
-        val menu = PopupMenu(this, menu_view)
-        menu.inflate(R.menu.menu_pop_up)
-        //menu.show()
-        menu.setOnMenuItemClickListener { item ->
-            when (item.itemId) {
-                R.id.menu_change_pass -> {
-
-                    val alert = AlertDialog.Builder(this    )
-                    val v = LayoutInflater.from(this).inflate(R.layout.changepass, null)
-                    alert.setView(v)
-                    val dialog = alert.create()
-
-                    v.btn_confirm.setOnClickListener{
-                        val cp = v.et_current_password.text.toString()
-                        val np = v.et_new_password.text.toString()
-                        val cnp = v.et_cnew_password.text.toString()
-
-                        if (v.et_current_password.text.toString().isEmpty()){
-                            v.input_current_password.error = "This field is required"
-                            return@setOnClickListener
-                        }
-
-                        if (v.et_new_password.text.toString().isEmpty()){
-                            v.input_new_password.error = "This field is required"
-                            return@setOnClickListener
-                        }
-
-                        if (v.et_cnew_password.text.toString().isEmpty()){
-                            v.input_cnew_password.error = "This field is required"
-                            return@setOnClickListener
-                        }
-
-                        if(v.et_new_password.text.toString()!= v.et_cnew_password.text.toString()){
-                            v.input_cnew_password.error = "Password mismatch!"
-                        }
-
-                        val params:MutableMap<String, String> = HashMap()
-                        params["currentPassword"] = cp
-                        params["newPassword"] = np
-                        params["confirmPassword"] = cnp
-
-                        APIRequest.changePass(this, API.CHANGEPASS, params, object : APIRequest.URLCallback{
-                            override fun didUrlResponse(response: String) {
-                                dialog.dismiss()
-                            }
-
-                            override fun didUrlError(error: VolleyError) {
-
-                            }
-
-                        })
-
-                    }
-                    dialog.show()
-                }
-
-                R.id.menu_logout -> {
-
-                    if (cart.isNotEmpty()) {
-                        val alert = AlertDialog.Builder(this)
-                        alert.setTitle("You have pending transaction!")
-                        alert.setMessage("Are you sure you want to logout?")
-                        alert.setNegativeButton("No", { _, _ ->
-
-                        })
-                        alert.setPositiveButton("Yes", { _, _ ->
-                            logout()
-                        }).show()
-
-                    }else
-                        logout()
-                }
-            }
-            true
-
-        }
-        menu_view.setOnClickListener {
-            menu.show()
-        }
-
 
     }
 
@@ -370,11 +291,11 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(!isMain)
         when {isMain -> {
             arrowNext?.visibility = View.VISIBLE
-            arrowBack?.visibility = View.GONE
+            cartCheckout?.visibility = View.GONE
         }
             else -> {
                 arrowNext?.visibility = View.GONE
-                arrowBack?.visibility = View.GONE
+                cartCheckout?.visibility = View.VISIBLE
             }
         }
     }
@@ -599,6 +520,36 @@ class MainActivity : AppCompatActivity() {
                         //setRecyclerView()
                         //getSavedCart()
                     }
+                }catch (e: JSONException){
+                    e.printStackTrace()
+                }
+
+//                for (items in productList){
+//                    productDB?.productDao()?.insert(items)
+//                }
+            }
+
+            override fun didUrlError(error: VolleyError) {
+                showRequestError(error)
+            }
+
+        })
+    }
+
+    private fun getProductSize(){
+        APIRequest.get(this, API.PRODUCTSIZE, object : APIRequest.URLCallback{
+            override fun didUrlResponse(response: String) {
+                Log.i("MainActivity", "getProductSize: $response")
+                productSizeList = ArrayList()
+
+                try {
+                    val jsonArray = JSONObject(response).getJSONObject("data").getJSONArray("items")
+
+                    for (i in 0 until jsonArray.length()){
+                        val product = ProductSize(jsonArray.getJSONObject(i))
+                        productSizeList.add(product)
+                    }
+
                 }catch (e: JSONException){
                     e.printStackTrace()
                 }

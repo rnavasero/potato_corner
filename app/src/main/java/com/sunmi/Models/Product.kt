@@ -15,9 +15,12 @@ class Product{
     constructor()
 
 
+
+    var dbId: Int = 0
+
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "product_id")
-    var pid: Long = 0
+    @ColumnInfo(name = "pid")
+    var pid: Int = 0
 
     @ColumnInfo(name = "id")
     var id: String = ""
@@ -99,7 +102,7 @@ class Product{
 
 
 
-    constructor(product_id:Long,id: String, sku: String, name: String, category: String, size: String, flavor: String, price: Double, imgUrl: Int, qty: Int) {
+    constructor(product_id:Int,id: String, sku: String, name: String, category: String, size: String, flavor: String, price: Double, imgUrl: Int, qty: Int) {
         this.pid = product_id
         this.id = id
         this.sku = sku

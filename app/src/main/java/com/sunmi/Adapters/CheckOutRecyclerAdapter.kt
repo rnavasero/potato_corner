@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.row_check_out.view.*
  */
 class CheckOutRecyclerAdapter(val mContext:Context):RecyclerView.Adapter<CheckOutRecyclerAdapter.ViewHolder>() {
 
-    private val TAG2 = "#####################"
+    private val TAG2 = "###"
     var mActivity: MainActivity? = null
 
     init {
@@ -97,7 +97,6 @@ class CheckOutRecyclerAdapter(val mContext:Context):RecyclerView.Adapter<CheckOu
                 }.show()
             }
 
-
         }
 
         private fun removeProduct(){
@@ -129,8 +128,5 @@ class CheckOutRecyclerAdapter(val mContext:Context):RecyclerView.Adapter<CheckOu
 
 
     }
-
-
-
 
 }

@@ -17,9 +17,12 @@ import com.example.codemagnus.newproject.Session.Session
 import com.mycart.advance.https.API
 import com.mycart.advance.https.APIRequest
 import com.sunmi.Activities.MainActivity
+import com.sunmi.Fragments.FragmentReceipt
 import com.sunmi.printerhelper.R
 import com.sunmi.printerhelper.utils.AidlUtil
+import kotlinx.android.synthetic.main.dialog_confirm_checkout.view.*
 import kotlinx.android.synthetic.main.fragment_check_out.*
+import kotlinx.android.synthetic.main.layout_checkout.*
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -60,10 +63,28 @@ class CheckOutFragment: Fragment() {
 
         if (mActivity?.cart!!.isNotEmpty()){
             tv_empty_cart.visibility    = View.GONE
+            imgcart.visibility =        View.GONE
             adapter                     = CheckOutRecyclerAdapter(context)
             rv_check_out.layoutManager  = LinearLayoutManager(context)
             rv_check_out.adapter        = adapter
         }
+        else
+        {
+            tv_empty_cart.visibility    = View.VISIBLE
+            imgcart.visibility =        View.VISIBLE
+        }
+
+        delete_all_product.setOnClickListener {
+            //mActivity?.cart = mutableListOf()
+        }
+
+
+//        btn_checkout.setOnClickListener {
+//            mActivity!!.newFragment(SuccessFragment(),SuccessFragment.TAG)
+//        }
+
+
+
 
 //        btn_checkout.setOnClickListener {
 //            if (mActivity?.cart!!.isEmpty()){
@@ -94,8 +115,8 @@ class CheckOutFragment: Fragment() {
 //                dialog.show()
 //            }
 //        }
-
-
+//
+//
     }
 
     private fun postCheckOut() {

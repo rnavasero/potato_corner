@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.layout_size.view.*
  */
 class SizeSelectAdapter(private val mContext:Context, var _category:String?,var _image:Int?,var _name:String?, private var itemID:String?):RecyclerView.Adapter<SizeSelectAdapter.ViewHolder>() {
 
-    private val TAG2 = "#####################"
+    private val TAG2 = "###"
 
     var mActivity: MainActivity? = null
     var itemList:MutableList<Product> = mutableListOf()
@@ -70,49 +70,49 @@ class SizeSelectAdapter(private val mContext:Context, var _category:String?,var 
             val item = itemList[position]
             itemView.tv_size_sample.text = item.size
 
-//            itemView.ll_itemSize.setOnClickListener {
-//
-//                    when (item.size){
-//
-//                        "Small"->
-//                        {
-//                            item.id = "${itemID.toString()}1"
-//                            item.category = _c!!
-//                            item.name = _n!!
-//                            item.qty = 1
-//                            item.flavor = item.size
-//                            item.imgUrl = _i!!
-//                            item.price = 10.00
-//                        }
-//
-//                        "Medium"->
-//                        {
-//                            item.id = "${itemID.toString()}2"
-//                            item.category = _c!!
-//                            item.name = _n!!
-//                            item.qty = 1
-//                            item.flavor = item.size
-//                            item.imgUrl = _i!!
-//                            item.price = 15.00
-//                        }
-//
-//                        "Large"->
-//                        {
-//                            item.id = "${itemID.toString()}3"
-//                            item.category = _c!!
-//                            item.name = _n!!
-//                            item.qty = 1
-//                            item.flavor = item.size
-//                            item.imgUrl = _i!!
-//                            item.price = 20.00
-//                        }
-//
-//                    }
-//                mActivity!!.cart.add(Product(item.id, item.name, item.description, item.imgUrl,item.category,item.flavor,item.size,item.price,item.qty))
-//                mActivity!!.setCartCount(mActivity!!.productCount + 1)
-//                mActivity!!.newFragment(CheckOutFragment(),CheckOutFragment.TAG)
-//                mActivity!!.setCartState(true)
-//            }
+            itemView.ll_itemSize.setOnClickListener {
+
+                    when (item.size){
+
+                        "Small"->
+                        {
+                            item.id = "${itemID.toString()}1"
+                            item.category = _c!!
+                            item.name = _n!!
+                            item.qty = 1
+                            item.flavor = item.size
+                            item.imgUrl = _i!!
+                            item.price = 10.00
+                        }
+
+                        "Medium"->
+                        {
+                            item.id = "${itemID.toString()}2"
+                            item.category = _c!!
+                            item.name = _n!!
+                            item.qty = 1
+                            item.flavor = item.size
+                            item.imgUrl = _i!!
+                            item.price = 15.00
+                        }
+
+                        "Large"->
+                        {
+                            item.id = "${itemID.toString()}3"
+                            item.category = _c!!
+                            item.name = _n!!
+                            item.qty = 1
+                            item.flavor = item.size
+                            item.imgUrl = _i!!
+                            item.price = 20.00
+                        }
+
+                    }
+                mActivity!!.cart.add(Product(item.id, item.sku, item.name, item.category, item.size,item.flavor,item.price,item.imgUrl,item.qty))
+                mActivity!!.setCartCount(mActivity!!.productCount + 1)
+                mActivity!!.newFragment(CheckOutFragment(),CheckOutFragment.TAG)
+                mActivity!!.setCartState(true)
+            }
 
         }
 

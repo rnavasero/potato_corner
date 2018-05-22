@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.size_content.view.*
  */
 class SizeAdapter(val mContext:Context,var category:String?, var flavor:String?, var itemID:String?):RecyclerView.Adapter<SizeAdapter.ViewHolder>() {
 
-    private val TAG2 = "#####################"
+    private val TAG2 = "###"
     var mActivity: MainActivity? = null
     var itemList:MutableList<Product> = mutableListOf()
 
@@ -71,84 +71,85 @@ class SizeAdapter(val mContext:Context,var category:String?, var flavor:String?,
 
             Picasso.with(mContext).load(item.imgUrl).resize(150,150   ).centerCrop().into(itemView.iv_item_content2)
 
-//            itemView.cv_item2.setOnClickListener{
-//
-//                when (item.size){
-//                    "Regular"->{
-//                        item.id = "${itemID.toString()}1"
-//                        item.category = "Flavored Fries"
-//                        item.flavor = f!!
-//                        item.name = c!!
-//                        item.qty = 1
-//                        item.size = size
-//                        item.imgUrl = image
-//                        SizeSelectionFragment().newInstance(item)
-//
-//                    }
-//
-//                    "Large"->{
-//                        item.id = "${itemID.toString()}2"
-//                        item.category = c!!
-//                        item.flavor = f!!
-//                        item.name = c
-//                        item.qty = 1
-//                        item.size = size
-//                        item.imgUrl = image
-//                        SizeSelectionFragment().newInstance(item)
-//                    }
-//
-//                    "Jumbo"->{
-//                        item.id = "${itemID.toString()}3"
-//                        item.category = c!!
-//                        item.flavor = f!!
-//                        item.name = c
-//                        item.qty = 1
-//                        item.size = size
-//                        item.imgUrl = image
-//                        SizeSelectionFragment().newInstance(item)
-//                    }
-//
-//                    "Mega"->{
-//                        item.id = "${itemID.toString()}4"
-//                        item.category = c!!
-//                        item.flavor = f!!
-//                        item.name = c
-//                        item.qty = 1
-//                        item.size = size
-//                        item.imgUrl = image
-//                        SizeSelectionFragment().newInstance(item)
-//                    }
-//
-//                    "Giga"->{
-//                        item.id = "${itemID.toString()}5"
-//                        item.category = c!!
-//                        item.flavor = f!!
-//                        item.name = c
-//                        item.qty = 1
-//                        item.size = size
-//                        item.imgUrl = image
-//                        SizeSelectionFragment().newInstance(item)
-//                    }
-//
-//                    "Terra"->{
-//                        item.id = "${itemID.toString()}6"
-//                        item.category = c!!
-//                        item.flavor = f!!
-//                        item.name = c
-//                        item.qty = 1
-//                        item.size = size
-//                        item.imgUrl = image
-//                        SizeSelectionFragment().newInstance(item)
-//                    }
-//                }
-//                mActivity!!.cart.add(Product(item.id, item.name, item.description, item.imgUrl,item.category,item.flavor,item.size,item.price,item.qty))
-//                mActivity!!.setCartCount(mActivity!!.productCount+1)
-//                SizeSelectionFragment().newInstance(item)
-//                mActivity!!.newFragment(CheckOutFragment(),CheckOutFragment.TAG)
-//                Log.i(TAG2,item.toString())
-//
-//
-//            }
+            itemView.cv_item2.setOnClickListener{
+
+                when (item.size){
+                    "Regular"->{
+                        item.id = "${itemID.toString()}1"
+                        item.category = "Flavored Fries"
+                        item.flavor = f!!
+                        item.name = c!!
+                        item.qty = 1
+                        item.size = size
+                        item.imgUrl = R.drawable.cheese
+                        SizeSelectionFragment().newInstance(item)
+
+                    }
+
+                    "Large"->{
+                        item.id = "${itemID.toString()}2"
+                        item.category = c!!
+                        item.flavor = f!!
+                        item.name = c
+                        item.qty = 1
+                        item.size = size
+                        item.imgUrl = R.drawable.cheese
+                        SizeSelectionFragment().newInstance(item)
+                    }
+
+                    "Jumbo"->{
+                        item.id = "${itemID.toString()}3"
+                        item.category = c!!
+                        item.flavor = f!!
+                        item.name = c
+                        item.qty = 1
+                        item.size = size
+                        item.imgUrl = R.drawable.cheese
+                        SizeSelectionFragment().newInstance(item)
+                    }
+
+                    "Mega"->{
+                        item.id = "${itemID.toString()}4"
+                        item.category = c!!
+                        item.flavor = f!!
+                        item.name = c
+                        item.qty = 1
+                        item.size = size
+                        item.imgUrl = R.drawable.cheese
+                        SizeSelectionFragment().newInstance(item)
+                    }
+
+                    "Giga"->{
+                        item.id = "${itemID.toString()}5"
+                        item.category = c!!
+                        item.flavor = f!!
+                        item.name = c
+                        item.qty = 1
+                        item.size = size
+                        item.imgUrl = R.drawable.cheese
+                        SizeSelectionFragment().newInstance(item)
+                    }
+
+                    "Terra"->{
+                        item.id = "${itemID.toString()}6"
+                        item.category = c!!
+                        item.flavor = f!!
+                        item.name = c
+                        item.qty = 1
+                        item.size = size
+                        item.imgUrl = R.drawable.cheese
+                        SizeSelectionFragment().newInstance(item)
+                    }
+                }
+                mActivity!!.cart.add(Product(item.id, item.sku, item.name, item.category, item.size,item.flavor,item.price,item.imgUrl,item.qty))
+                mActivity!!.setCartCount(mActivity!!.productCount+1)
+                SizeSelectionFragment().newInstance(item)
+                mActivity!!.setCartState(true)
+                mActivity!!.newFragment(CheckOutFragment(),CheckOutFragment.TAG)
+                Log.i(TAG2,item.toString())
+
+
+            }
 
 
 

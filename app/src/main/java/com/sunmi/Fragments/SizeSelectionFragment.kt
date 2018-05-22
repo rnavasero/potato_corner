@@ -66,16 +66,16 @@ class SizeSelectionFragment: DialogFragment() {
         Log.i(TAG2, items.toString())
 
 
-        if(category == "Flavored Fries"){
+        if(category == "FLAVORED FRIES"){
             rv_sizeselect.layoutManager = GridLayoutManager(context,2)
             rv_sizeselect.adapter = adapter
         }
-        else if(category == "Fancy Fries")
+        else if(category == "FANCY FRIES")
         {
             rv_sizeselect.layoutManager = GridLayoutManager(context,1)
             rv_sizeselect.adapter = mAdapter
         }
-        else if(category == "Beverages")
+        else if(category == "DRINKS")
         {
             rv_sizeselect.layoutManager = GridLayoutManager(context,1)
             rv_sizeselect.adapter = mAdapter
@@ -83,15 +83,6 @@ class SizeSelectionFragment: DialogFragment() {
         Log.i(TAG2,"SIZE FRAGMENT" + items.toString())
 
 
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-
-        if (this.isRemoving) {
-            val fm = fragmentManager
-            fm.beginTransaction().remove(SizeSelectionFragment()).commit()
-        }
     }
 
     override fun onDestroy() {
