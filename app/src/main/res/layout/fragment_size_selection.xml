@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:layout_gravity="center"
     android:clickable="true"
-    android:background="#80000000">
+    android:background="#b3000000">
 
     <android.support.constraint.ConstraintLayout
         android:layout_marginLeft="40dp"

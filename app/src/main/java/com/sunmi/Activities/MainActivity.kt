@@ -24,10 +24,13 @@ import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.content.ContextCompat
+import android.support.v4.content.ContextCompat.startActivity
+import android.support.v4.view.GravityCompat
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.PopupMenu
 import android.support.v7.widget.Toolbar
+import android.text.TextUtils.replace
 import android.util.DisplayMetrics
 import android.util.Log
 import android.view.Gravity
@@ -47,6 +50,7 @@ import com.mycart.advance.https.APIRequest
 import com.sunmi.Fragments.ProfileFragment
 import com.sunmi.Models.*
 import com.sunmi.printerhelper.R
+import com.sunmi.printerhelper.R.id.*
 import com.sunmi.printerhelper.utils.AidlUtil
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.changepass.view.*
@@ -86,6 +90,7 @@ class MainActivity : AppCompatActivity() {
     var boolean_permission: Boolean = false
     val REQUEST_PERMISSIONS = 1
     var itemCheck:Boolean = false
+    private var selectedId = R.id.navigation_home
 
 
     private var isAidl: Boolean = false
@@ -177,28 +182,30 @@ class MainActivity : AppCompatActivity() {
     }
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
-        when (item.itemId) {
-            R.id.navigation_home -> {
-                onBackPressed()
-                setOrderState(true)
+            when (item.itemId) {
+                R.id.navigation_home -> {
+                    onBackPressed()
+                    setOrderState(true)
 //                val songsFragment = SongsFragment.newInstance()
 //                openFragment(songsFragment)
-                return@OnNavigationItemSelectedListener true
+                    return@OnNavigationItemSelectedListener true
+                }
+                R.id.navigation_cart -> {
+                    setCartState(true)
+                    val toFragment = CheckOutFragment.newInstance()
+                    openFragment(toFragment)
+                    return@OnNavigationItemSelectedListener true
+                }
+                R.id.navigation_profile -> {
+                    val toFragment = ProfileFragment.newInstance()
+                    profileFragment(toFragment)
+                    return@OnNavigationItemSelectedListener true
+                }
             }
-            R.id.navigation_cart -> {
-                setCartState(true)
-                val toFragment = CheckOutFragment.newInstance()
-                openFragment(toFragment)
-                return@OnNavigationItemSelectedListener true
-            }
-            R.id.navigation_profile -> {
-                val toFragment = ProfileFragment.newInstance()
-                openFragment(toFragment)
-                return@OnNavigationItemSelectedListener true
-            }
+            selectedId = item.itemId
+            true
         }
-        false
-    }
+
 
     fun setCustomToolbarTitle(title:String){
         val l = layoutInflater.inflate(R.layout.layout_toolbar_title, null)
@@ -212,6 +219,13 @@ class MainActivity : AppCompatActivity() {
     private fun openFragment(fragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.main_frame, fragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
+    }
+
+    private fun profileFragment(fragment: Fragment) {
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.profile_frame, fragment)
         transaction.addToBackStack(null)
         transaction.commit()
     }
@@ -334,7 +348,7 @@ class MainActivity : AppCompatActivity() {
 
     fun setCartState(isTrue:Boolean){
         when {isTrue -> {
-            mToolbar.title = "CART"
+            mToolbar.title = ""
             imgcart.setImageResource(R.drawable.ic_filled_circle)
             setOrderState(false)
             setReceiptState(false)

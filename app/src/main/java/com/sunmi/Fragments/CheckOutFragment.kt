@@ -58,6 +58,7 @@ class CheckOutFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         mActivity = context as MainActivity?
+        mActivity!!.setCustomToolbarTitle("CART")
         mActivity?.setToolbar(false)
         setTotalPrice()
 

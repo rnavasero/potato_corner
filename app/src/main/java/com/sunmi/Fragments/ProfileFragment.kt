@@ -38,6 +38,7 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mActivity = context as MainActivity?
+        mActivity!!.setCustomToolbarTitle("ACCOUNT")
 
         tv_sign_out.setOnClickListener {
 

@@ -34,6 +34,7 @@ class SuccessFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         instance = this
         mActivity?.setToolbar(false)
+        mActivity!!.setCustomToolbarTitle("RECEIPT")
     }
 
     override fun onDestroy() {
