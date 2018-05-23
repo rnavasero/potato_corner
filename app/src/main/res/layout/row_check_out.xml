@@ -39,7 +39,7 @@
 
             <TextView
                 android:id="@+id/tv_cart_product_name"
-                android:layout_width="0dp"
+                android:layout_width="149dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
@@ -57,18 +57,16 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="32dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
+                android:gravity="start"
                 android:text="Your description here..."
                 android:textAlignment="viewStart"
                 android:textColor="@android:color/black"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/tv_cart_minus"
-                app:layout_constraintStart_toEndOf="@+id/cv_c_item"
+                app:layout_constraintEnd_toEndOf="@+id/tv_cart_product_name"
+                app:layout_constraintStart_toStartOf="@+id/tv_cart_product_name"
                 app:layout_constraintTop_toBottomOf="@+id/tv_cart_product_name"
-                app:layout_constraintVertical_chainStyle="packed"
-                android:gravity="start" />
+                app:layout_constraintVertical_chainStyle="packed" />
 
             <TextView
                 android:id="@+id/tv_cart_total_price"
@@ -91,7 +89,7 @@
                 android:id="@+id/tv_cart_add"
                 android:layout_width="15dp"
                 android:layout_height="15dp"
-                android:layout_marginEnd="72dp"
+                android:layout_marginEnd="75dp"
                 android:layout_marginTop="20dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:clickable="true"
@@ -114,10 +112,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="6dp"
+                android:background="#f5f4f4"
                 android:gravity="center"
                 android:paddingLeft="6dp"
                 android:paddingRight="6dp"
-                android:background="#f5f4f4"
                 android:text="0"
                 android:textColor="@android:color/black"
                 app:layout_constraintBottom_toTopOf="@+id/tv_cart_minus"

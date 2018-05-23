@@ -15,14 +15,16 @@ import android.view.ViewGroup
 import com.example.codemagnus.newproject.Adapters.SizeAdapter
 import com.example.codemagnus.newproject.Adapters.SizeSelectAdapter
 import com.sunmi.Activities.MainActivity
+import com.sunmi.Fragments.FragmentReceipt
 import com.sunmi.Models.Product
 import com.sunmi.printerhelper.R
+import com.sunmi.printerhelper.R.id.rv_sizeselect
 import kotlinx.android.synthetic.main.fragment_size_selection.*
 
 /**
  * Created by codemagnus on 3/21/18.
  */
-class SizeSelectionFragment: DialogFragment() {
+class SizeSelectionFragment: Fragment() {
 
     private val TAG2 = "#####################"
     private var mActivity: MainActivity? = null
@@ -38,13 +40,8 @@ class SizeSelectionFragment: DialogFragment() {
         var flavor:String? = null
         val TAG: String = SizeSelectionFragment::class.java.simpleName
         var instance: SizeSelectionFragment? = SizeSelectionFragment()
+        fun newInstance(): SizeSelectionFragment = SizeSelectionFragment()
 
-    }
-
-    fun newInstance(product: Product):Fragment{
-        var fragment = SizeSelectionFragment()
-        items = product
-        return fragment
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -62,7 +59,9 @@ class SizeSelectionFragment: DialogFragment() {
         adapter = SizeAdapter(context, category,flavor, i_id)
         mAdapter = SizeSelectAdapter(context, category, i_image, n_name, i_id)
 
-
+        btn_close.setOnClickListener {
+            mActivity!!.onBackPressed()
+        }
         Log.i(TAG2, items.toString())
 
 

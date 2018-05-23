@@ -34,6 +34,7 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.WindowManager
+import android.widget.TextView
 import android.widget.Toast
 import com.android.volley.VolleyError
 import com.example.codemagnus.newproject.Adapters.CheckOutRecyclerAdapter
@@ -49,6 +50,7 @@ import com.sunmi.printerhelper.R
 import com.sunmi.printerhelper.utils.AidlUtil
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.changepass.view.*
+import kotlinx.android.synthetic.main.layout_toolbar_title.*
 import kotlinx.android.synthetic.main.menu.*
 import kotlinx.coroutines.experimental.Deferred
 import kotlinx.coroutines.experimental.android.UI
@@ -68,6 +70,7 @@ class MainActivity : AppCompatActivity() {
     var arrowBack: View? = null
     var arrowNext: View? = null
     var cartCheckout: View? = null
+    var tb_title: View? = null
     var cart: MutableList<Product> = mutableListOf()
     var productList: MutableList<Product> = mutableListOf()
     var productSizeList:MutableList<ProductSize> = mutableListOf()
@@ -106,11 +109,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         productDB = ProductDataBase.init(this)
         navigationView.onNavigationItemSelectedListener = mOnNavigationItemSelectedListener
-        mToolbar.title = "MENU"
+        setCustomToolbarTitle("ORDERS")
         setOrderState(true)
 
         getAllProducts()
-        getProductSize()
+        //getProductSize()
+
+        getSavedCart()
 
         isAidl = true
         AidlUtil.getInstance().connectPrinterService(this)
@@ -136,6 +141,7 @@ class MainActivity : AppCompatActivity() {
         cartCheckout = layoutInflater.inflate(R.layout.layout_checkout, null)
         mToolbar.addView(cartCheckout, 2, Toolbar.LayoutParams(Gravity.END))
 
+
         cartCheckout?.setOnClickListener {
 
             newFragment(SuccessFragment(), SuccessFragment.TAG)
@@ -143,7 +149,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        arrowNext?.setOnClickListener {
+        arrowNext?.setOnClickListener{
             setCartState(true)
             setToolbar(false)
             fm!!.beginTransaction().apply {
@@ -192,6 +198,14 @@ class MainActivity : AppCompatActivity() {
             }
         }
         false
+    }
+
+    fun setCustomToolbarTitle(title:String){
+        val l = layoutInflater.inflate(R.layout.layout_toolbar_title, null)
+        val tv = l.findViewById<TextView>(R.id.toolbar_title)
+        tv.text = title
+        mToolbar.addView(l, 0, Toolbar.LayoutParams(Gravity.CENTER_HORIZONTAL))
+
     }
 
 
@@ -307,7 +321,7 @@ class MainActivity : AppCompatActivity() {
 
     fun setOrderState(isTrue:Boolean){
         when {isTrue -> {
-            mToolbar.title = "MENU"
+            mToolbar.title = ""
             imgorder.setImageResource(R.drawable.ic_filled_circle)
             setCartState(false)
             setReceiptState(false)
@@ -353,8 +367,8 @@ class MainActivity : AppCompatActivity() {
 
     fun addnewFragment(fragment: Fragment?, tag: String) {
         fm!!.beginTransaction().apply {
-            replace(R.id.main_frame, fragment, tag)
-            //addToBackStack(tag)
+            replace(R.id.main_main_frame, fragment, tag)
+            addToBackStack(null)
         }.commit()
     }
 
@@ -521,6 +535,17 @@ class MainActivity : AppCompatActivity() {
                         productList.add(product)
                     }
 
+                    async(UI){
+                        bg {
+                            //productDB?.productDao()?.deleteAll()
+
+                            for (item in productList){
+                                productDB?.productDao()?.insert(item)
+                            }
+                        }
+                        Toast.makeText(this@MainActivity, "Successfully saved", Toast.LENGTH_SHORT).show()
+                    }
+
                     if (productList.isNotEmpty()){
                         //setRecyclerView()
                         //getSavedCart()
@@ -529,9 +554,6 @@ class MainActivity : AppCompatActivity() {
                     e.printStackTrace()
                 }
 
-//                for (items in productList){
-//                    productDB?.productDao()?.insert(items)
-//                }
             }
 
             override fun didUrlError(error: VolleyError) {

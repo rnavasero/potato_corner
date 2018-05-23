@@ -2,51 +2,57 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:layout_gravity="center"
-    android:background="@android:color/white">
+    android:clickable="true"
+    android:background="#80000000">
 
     <android.support.constraint.ConstraintLayout
-        android:layout_width="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginBottom="16dp"
+        android:background="@android:color/white"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center">
 
         <TextView
+            android:textColor="@android:color/white"
             android:id="@+id/textView24"
             android:layout_width="0dp"
             android:layout_height="50dp"
-            android:background="@color/colorPrimary"
+            android:background="#7bca9d"
             android:gravity="center"
             android:text="SAMPLE"
             android:textSize="25dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <FrameLayout
-            android:paddingRight="5dp"
-            android:paddingLeft="5dp"
-            android:layout_width="wrap_content"
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_sizeselect"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView24">
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_sizeselect"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView24">
 
-
-            </android.support.v7.widget.RecyclerView>
-
-        </FrameLayout>
+        </android.support.v7.widget.RecyclerView>
 
 
     </android.support.constraint.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/btn_close"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:padding="4dp"
+        android:layout_margin="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_icon_remove_white"
+        android:focusable="true" />
 
 </FrameLayout>

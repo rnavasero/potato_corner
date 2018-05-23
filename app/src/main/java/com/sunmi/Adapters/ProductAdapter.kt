@@ -1,6 +1,8 @@
 package com.example.codemagnus.newproject.Adapters
 
+import android.app.DialogFragment
 import android.content.Context
+import android.support.v4.app.FragmentManager
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.RecyclerView
 import android.util.Log
@@ -47,8 +49,6 @@ class ProductAdapter(val mContext:Context?, itemList:MutableList<Product>?):Recy
             itemView.tv_item_name.text = item.name
             Picasso.with(mContext).load(item.imgUrl).resize(260,260).centerCrop().into(itemView.iv_item_content)
 
-
-
             itemView.fl_product_select.setOnClickListener {
 
                 if (item.category != "FLAVORED FRIES") {
@@ -57,23 +57,26 @@ class ProductAdapter(val mContext:Context?, itemList:MutableList<Product>?):Recy
                         SizeSelectionFragment.i_id = item.id
                         SizeSelectionFragment.n_name = item.name
                         SizeSelectionFragment.i_image = item.imgUrl
-
-                        Log.i(TAG2,item.toString())
-                        mActivity?.newFragment(SizeSelectionFragment(), SizeSelectionFragment.TAG)
+                        SizeSelectionFragment.newInstance()
+                        mActivity!!.addnewFragment(SizeSelectionFragment(),SizeSelectionFragment.TAG)
 
                     } else if (item.category == "DRINKS"){
                         SizeSelectionFragment.category = item.category
                         SizeSelectionFragment.i_id = item.id
                         SizeSelectionFragment.n_name = item.name
                         SizeSelectionFragment.i_image = item.imgUrl
-                        mActivity?.newFragment(SizeSelectionFragment(), SizeSelectionFragment.TAG)
+                        mActivity!!.addnewFragment(SizeSelectionFragment(),SizeSelectionFragment.TAG)
+//                        val alert:android.support.v4.app.DialogFragment = SizeSelectionFragment()
+//                        alert.show(mActivity!!.fm, SizeSelectionFragment.TAG)
 
                     }
                 } else {
                     SizeSelectionFragment.category = item.category
                     SizeSelectionFragment.i_id = item.id
                     SizeSelectionFragment.flavor = item.name
-                    mActivity?.newFragment(SizeSelectionFragment(), SizeSelectionFragment.TAG)
+                    mActivity!!.addnewFragment(SizeSelectionFragment(),SizeSelectionFragment.TAG)
+//                    val alert:android.support.v4.app.DialogFragment = SizeSelectionFragment()
+//                    alert.show(mActivity!!.fm, SizeSelectionFragment.TAG)
 
 
                 }

@@ -13,8 +13,6 @@ import org.json.JSONObject
 class Product{
 
     constructor()
-    var dbId: Int = 0
-
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "pid")
     var pid: Int = 0
@@ -99,6 +97,8 @@ class Product{
 
 
 
+
+
     constructor(product_id:Int,id: String, sku: String, name: String, category: String, size: String, flavor: String, price: Double, imgUrl: Int, qty: Int) {
         this.pid = product_id
         this.id = id
@@ -122,6 +122,17 @@ class Product{
         this.price = price
         this.imgUrl = imgUrl
         this.qty = qty
+    }
+
+    constructor(id: String, sku: String, name: String, category: String, size: String, flavor: String, price: Double, imgUrl: Int) {
+        this.id = id
+        this.sku = sku
+        this.name = name
+        this.category = category
+        this.size = size
+        this.flavor = flavor
+        this.price = price
+        this.imgUrl = imgUrl
     }
 
     override fun toString(): String {
