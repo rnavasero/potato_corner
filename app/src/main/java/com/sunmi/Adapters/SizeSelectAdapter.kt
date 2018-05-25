@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.layout_size.view.*
 /**
  * Created by codemagnus on 3/22/18.
  */
-class SizeSelectAdapter(private val mContext:Context, var _category:String?,var _image:Int?,var _name:String?, private var itemID:String?):RecyclerView.Adapter<SizeSelectAdapter.ViewHolder>() {
+class SizeSelectAdapter(private val mContext:Context, var _category:Int?,var _image:Int?,var _name:String?, private var itemID:String?):RecyclerView.Adapter<SizeSelectAdapter.ViewHolder>() {
 
     private val TAG2 = "###"
 
@@ -77,7 +77,7 @@ class SizeSelectAdapter(private val mContext:Context, var _category:String?,var 
                         "Small"->
                         {
                             item.id = "${itemID.toString()}1"
-                            item.category = _c!!
+                            item.category = ""
                             item.name = _n!!
                             item.qty = 1
                             item.flavor = item.size
@@ -88,7 +88,7 @@ class SizeSelectAdapter(private val mContext:Context, var _category:String?,var 
                         "Medium"->
                         {
                             item.id = "${itemID.toString()}2"
-                            item.category = _c!!
+                            item.category = ""
                             item.name = _n!!
                             item.qty = 1
                             item.flavor = item.size
@@ -99,7 +99,7 @@ class SizeSelectAdapter(private val mContext:Context, var _category:String?,var 
                         "Large"->
                         {
                             item.id = "${itemID.toString()}3"
-                            item.category = _c!!
+                            item.category = ""
                             item.name = _n!!
                             item.qty = 1
                             item.flavor = item.size

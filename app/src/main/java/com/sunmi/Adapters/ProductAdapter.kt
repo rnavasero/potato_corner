@@ -15,6 +15,7 @@ import com.example.codemagnus.newproject.Fragments.CheckOutFragment
 import com.example.codemagnus.newproject.Fragments.SizeSelectionFragment
 import com.squareup.picasso.Picasso
 import com.sunmi.Activities.MainActivity
+import com.sunmi.Models.Category
 import com.sunmi.Models.Product
 import com.sunmi.printerhelper.R
 import kotlinx.android.synthetic.main.category_content.view.*
@@ -23,7 +24,7 @@ import kotlinx.android.synthetic.main.category_content.view.*
 /**
  * Created by codemagnus on 3/20/18.
  */
-class ProductAdapter(val mContext:Context?, itemList:MutableList<Product>?):RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
+class ProductAdapter(val mContext:Context?, itemList:MutableList<Category>?):RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
 
     private val TAG2 = "###"
     val items = itemList
@@ -45,42 +46,52 @@ class ProductAdapter(val mContext:Context?, itemList:MutableList<Product>?):Recy
 
         val mActivity = mContext as MainActivity?
         fun bindHolderbyPosition(position: Int){
-            val item = items!![position]
-            itemView.tv_item_name.text = item.name
-            Picasso.with(mContext).load(item.imgUrl).resize(260,260).centerCrop().into(itemView.iv_item_content)
 
-            itemView.fl_product_select.setOnClickListener {
+            try {
+                val item = items!![position]
+                itemView.tv_item_name.text = item.name.toUpperCase()
+                //Picasso.with(mContext).load(item.imageUrl).resize(260,260).centerCrop().into(itemView.iv_item_content)
 
-                if (item.category != "FLAVORED FRIES") {
-                    if (item.category == "FANCY FRIES"){
-                        SizeSelectionFragment.category = item.category
-                        SizeSelectionFragment.i_id = item.id
-                        SizeSelectionFragment.n_name = item.name
-                        SizeSelectionFragment.i_image = item.imgUrl
-                        SizeSelectionFragment.newInstance()
-                        mActivity!!.addnewFragment(SizeSelectionFragment(),SizeSelectionFragment.TAG)
+                itemView.fl_product_select.setOnClickListener {
 
-                    } else if (item.category == "DRINKS"){
-                        SizeSelectionFragment.category = item.category
-                        SizeSelectionFragment.i_id = item.id
-                        SizeSelectionFragment.n_name = item.name
-                        SizeSelectionFragment.i_image = item.imgUrl
-                        mActivity!!.addnewFragment(SizeSelectionFragment(),SizeSelectionFragment.TAG)
+                    if (item.category_id != 1) {
+                        if (item.category_id == 2){
+                            SizeSelectionFragment.category_id = item.category_id
+                            //SizeSelectionFragment.i_id = item.id
+                            SizeSelectionFragment.n_name = item.name
+                            SizeSelectionFragment.i_image = item.imageUrl
+                            SizeSelectionFragment.newInstance()
+                            mActivity!!.addnewFragment(SizeSelectionFragment(),SizeSelectionFragment.TAG)
+                            Log.i(TAG2,item.category_id.toString())
+
+                        } else if (item.category_id == 3){
+                            SizeSelectionFragment.category_id = item.category_id
+                            //SizeSelectionFragment.i_id = item.id
+                            SizeSelectionFragment.n_name = item.name
+                            SizeSelectionFragment.i_image = item.imageUrl
+                            mActivity!!.addnewFragment(SizeSelectionFragment(),SizeSelectionFragment.TAG)
+                            Log.i(TAG2,item.category_id.toString())
 //                        val alert:android.support.v4.app.DialogFragment = SizeSelectionFragment()
 //                        alert.show(mActivity!!.fm, SizeSelectionFragment.TAG)
 
-                    }
-                } else {
-                    SizeSelectionFragment.category = item.category
-                    SizeSelectionFragment.i_id = item.id
-                    SizeSelectionFragment.flavor = item.name
-                    mActivity!!.addnewFragment(SizeSelectionFragment(),SizeSelectionFragment.TAG)
+                        }
+                    } else {
+                        SizeSelectionFragment.category_id = item.category_id
+                        //SizeSelectionFragment.i_id = item.id
+                        SizeSelectionFragment.flavor = item.name
+                        mActivity!!.addnewFragment(SizeSelectionFragment(),SizeSelectionFragment.TAG)
+                        Log.i(TAG2,item.category_id.toString())
 //                    val alert:android.support.v4.app.DialogFragment = SizeSelectionFragment()
 //                    alert.show(mActivity!!.fm, SizeSelectionFragment.TAG)
 
 
+                    }
+                    Log.i(TAG2,item.category_id.toString())
                 }
+            }catch (e:Exception){
+                e.printStackTrace()
             }
+
 
         }
 

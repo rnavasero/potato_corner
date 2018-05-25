@@ -41,7 +41,11 @@ class Product{
     @ColumnInfo(name = "image_path")
     var imgUrl = 0
 
+    @ColumnInfo(name = "qty")
     var qty: Int = 0
+
+    var category_id = 0
+
 
 
 
@@ -88,19 +92,18 @@ class Product{
             0.00
         }
 
+
         imgUrl = try {
             jsonObject.getInt("image_path")
         }catch (e: JSONException){
             0
         }
+        
     }
 
 
 
-
-
-    constructor(product_id:Int,id: String, sku: String, name: String, category: String, size: String, flavor: String, price: Double, imgUrl: Int, qty: Int) {
-        this.pid = product_id
+    constructor(id: String, sku: String, name: String, category: String, size: String, flavor: String, price: Double, imgUrl: Int, qty: Int) {
         this.id = id
         this.sku = sku
         this.name = name
@@ -112,7 +115,11 @@ class Product{
         this.qty = qty
     }
 
-    constructor(id: String, sku: String, name: String, category: String, size: String, flavor: String, price: Double, imgUrl: Int, qty: Int) {
+
+
+
+
+    constructor(id: String, sku: String, name: String, category: String, size: String, flavor: String, price: Double, imgUrl: Int, category_id: Int, qty: Int) {
         this.id = id
         this.sku = sku
         this.name = name
@@ -121,6 +128,36 @@ class Product{
         this.flavor = flavor
         this.price = price
         this.imgUrl = imgUrl
+        this.category_id = category_id
+        this.qty = qty
+    }
+
+
+
+    constructor(id: String, name: String, imgUrl: Int, category_id: Int) {
+        this.id = id
+        this.name = name
+        this.imgUrl = imgUrl
+        this.category_id = category_id
+    }
+
+    constructor(name: String, imgUrl: Int, category_id: Int) {
+        this.name = name
+        this.imgUrl = imgUrl
+        this.category_id = category_id
+    }
+
+    constructor(pid: Int, id: String, sku: String, name: String, category: String, size: String, flavor: String, price: Double, imgUrl: Int, category_id: Int, qty: Int) {
+        this.pid = pid
+        this.id = id
+        this.sku = sku
+        this.name = name
+        this.category = category
+        this.size = size
+        this.flavor = flavor
+        this.price = price
+        this.imgUrl = imgUrl
+        this.category_id = category_id
         this.qty = qty
     }
 
@@ -135,6 +172,7 @@ class Product{
         this.imgUrl = imgUrl
     }
 
+
     override fun toString(): String {
         val jsonObject = JSONObject()
 
@@ -147,6 +185,7 @@ class Product{
             jsonObject.put("flavor", flavor)
             jsonObject.put("price", price)
             jsonObject.put("image_path", imgUrl)
+            //jsonObject.put("category_id",category_id)
 
         } catch (e: JSONException) {
             e.printStackTrace()

@@ -43,7 +43,6 @@ class ProfileFragment : Fragment() {
         tv_sign_out.setOnClickListener {
 
             val alert = AlertDialog.Builder(context)
-            alert.setTitle("PC_POS_SYSTEM")
             alert.setMessage("Are you sure you want to logout?")
             alert.setNegativeButton("No", { _, _ ->
 

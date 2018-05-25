@@ -77,6 +77,9 @@ class MainActivity : AppCompatActivity() {
     var tb_title: View? = null
     var cart: MutableList<Product> = mutableListOf()
     var productList: MutableList<Product> = mutableListOf()
+    var categoryList1: MutableList<Category> = mutableListOf()
+    var categoryList2: MutableList<Category> = mutableListOf()
+    var categoryList3: MutableList<Category> = mutableListOf()
     var productSizeList:MutableList<ProductSize> = mutableListOf()
     private var cartView: View? = null
     var fm: FragmentManager? = null
@@ -118,6 +121,11 @@ class MainActivity : AppCompatActivity() {
         setOrderState(true)
 
         getAllProducts()
+
+        getSavedCart()
+        getProductByCategory1()
+        getProductByCategory2()
+        getProductByCategory3()
         //getProductSize()
 
         getSavedCart()
@@ -169,40 +177,38 @@ class MainActivity : AppCompatActivity() {
             onBackPressed()
         }
 
-
-        rv_main1.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        rv_main1.adapter = ProductAdapter(this, StaticData.getlists())
-
-        rv_main2.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        rv_main2.adapter = ProductAdapter(this, StaticData.getlists3())
-
-        rv_main3.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        rv_main3.adapter = ProductAdapter(this, StaticData.getlists2())
-
     }
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
+            if(selectedId == item.itemId){
+                return@OnNavigationItemSelectedListener true
+            }else{
+
+
             when (item.itemId) {
                 R.id.navigation_home -> {
                     onBackPressed()
                     setOrderState(true)
 //                val songsFragment = SongsFragment.newInstance()
 //                openFragment(songsFragment)
+                    selectedId = R.id.navigation_home
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.navigation_cart -> {
                     setCartState(true)
                     val toFragment = CheckOutFragment.newInstance()
                     openFragment(toFragment)
+                    selectedId = R.id.navigation_cart
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.navigation_profile -> {
                     val toFragment = ProfileFragment.newInstance()
                     profileFragment(toFragment)
+                    selectedId = R.id.navigation_profile
                     return@OnNavigationItemSelectedListener true
                 }
             }
-            selectedId = item.itemId
+            }
             true
         }
 
@@ -225,7 +231,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun profileFragment(fragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.profile_frame, fragment)
+        transaction.replace(R.id.main_main_frame, fragment)
         transaction.addToBackStack(null)
         transaction.commit()
     }
@@ -237,6 +243,7 @@ class MainActivity : AppCompatActivity() {
     override fun onBackPressed() {
 //
         setOrderState(true)
+        selectedId = R.id.navigation_home
         val f = supportFragmentManager.findFragmentById(R.id.main_frame)
         if (f is SuccessFragment) {
             if(fm!!.backStackEntryCount == 2) {
@@ -335,7 +342,7 @@ class MainActivity : AppCompatActivity() {
 
     fun setOrderState(isTrue:Boolean){
         when {isTrue -> {
-            mToolbar.title = ""
+            //mToolbar.title = ""
             imgorder.setImageResource(R.drawable.ic_filled_circle)
             setCartState(false)
             setReceiptState(false)
@@ -348,7 +355,7 @@ class MainActivity : AppCompatActivity() {
 
     fun setCartState(isTrue:Boolean){
         when {isTrue -> {
-            mToolbar.title = ""
+            //mToolbar.title = ""
             imgcart.setImageResource(R.drawable.ic_filled_circle)
             setOrderState(false)
             setReceiptState(false)
@@ -361,7 +368,7 @@ class MainActivity : AppCompatActivity() {
 
     fun setReceiptState(isTrue:Boolean){
         when {isTrue -> {
-            mToolbar.title = "PROFILE"
+            //mToolbar.title = ""
             imgreceipt.setImageResource(R.drawable.ic_filled_circle)
             setCartState(false)
             setOrderState(false)
@@ -577,25 +584,98 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun getProductSize(){
-        APIRequest.get(this, API.PRODUCTSIZE, object : APIRequest.URLCallback{
+
+    private fun getProductByCategory1(){
+        APIRequest.get(this, API.CATEGORY+1, object : APIRequest.URLCallback{
             override fun didUrlResponse(response: String) {
-                Log.i("MainActivity", "getProductSize: $response")
-                productSizeList = ArrayList()
+                Log.i("MainActivity", "getCategoryByProduct: $response")
+                categoryList1 = mutableListOf()
 
                 try {
                     val jsonArray = JSONObject(response).getJSONObject("data").getJSONArray("items")
 
                     for (i in 0 until jsonArray.length()){
-                        val product = ProductSize(jsonArray.getJSONObject(i))
-                        productSizeList.add(product)
+                        val product = Category(jsonArray.getJSONObject(i))
+                        categoryList1.add(product)
                     }
 
-                    Log.i(TAG2, productSizeList.toString())
+                    Log.i(TAG2, categoryList1.toString())
 
-                    if (productSizeList.isNotEmpty()){
-                        //setRecyclerView()
-                        //getSavedCart()
+                    if (categoryList1.isNotEmpty()){
+
+                        rv_main1.layoutManager = LinearLayoutManager(this@MainActivity, LinearLayoutManager.HORIZONTAL, false)
+                        rv_main1.adapter = ProductAdapter(this@MainActivity, categoryList1)
+                    }
+
+                }catch (e: JSONException){
+                    e.printStackTrace()
+                }
+
+
+            }
+
+            override fun didUrlError(error: VolleyError) {
+                showRequestError(error)
+            }
+
+        })
+    }
+
+    private fun getProductByCategory2(){
+        APIRequest.get(this, API.CATEGORY+2, object : APIRequest.URLCallback{
+            override fun didUrlResponse(response: String) {
+                Log.i("MainActivity", "getCategoryByProduct: $response")
+                categoryList2 = ArrayList()
+
+                try {
+                    val jsonArray = JSONObject(response).getJSONObject("data").getJSONArray("items")
+
+                    for (i in 0 until jsonArray.length()){
+                        val product = Category(jsonArray.getJSONObject(i))
+                        categoryList2.add(product)
+                    }
+
+                    Log.i(TAG2, categoryList2.toString())
+
+                    if (categoryList2.isNotEmpty()){
+
+                        rv_main2.layoutManager = LinearLayoutManager(this@MainActivity, LinearLayoutManager.HORIZONTAL, false)
+                        rv_main2.adapter = ProductAdapter(this@MainActivity, categoryList2)
+                    }
+
+                }catch (e: JSONException){
+                    e.printStackTrace()
+                }
+
+
+            }
+
+            override fun didUrlError(error: VolleyError) {
+                showRequestError(error)
+            }
+
+        })
+    }
+
+    private fun getProductByCategory3(){
+        APIRequest.get(this, API.CATEGORY+3, object : APIRequest.URLCallback{
+            override fun didUrlResponse(response: String) {
+                Log.i("MainActivity", "getCategoryByProduct: $response")
+                categoryList3 = ArrayList()
+
+                try {
+                    val jsonArray = JSONObject(response).getJSONObject("data").getJSONArray("items")
+
+                    for (i in 0 until jsonArray.length()){
+                        val product = Category(jsonArray.getJSONObject(i))
+                        categoryList3.add(product)
+                    }
+
+                    Log.i(TAG2, categoryList3.toString())
+
+                    if (categoryList3.isNotEmpty()){
+                        rv_main3.layoutManager = LinearLayoutManager(this@MainActivity, LinearLayoutManager.HORIZONTAL, false)
+                        rv_main3.adapter = ProductAdapter(this@MainActivity, categoryList3)
                     }
 
                 }catch (e: JSONException){

@@ -17,6 +17,7 @@ import com.example.codemagnus.newproject.Session.Session
 import com.mycart.advance.https.API
 import com.mycart.advance.https.APIRequest
 import com.sunmi.Activities.MainActivity
+import com.sunmi.Fragments.BaseFragment
 import com.sunmi.Fragments.FragmentReceipt
 import com.sunmi.printerhelper.R
 import com.sunmi.printerhelper.utils.AidlUtil
@@ -29,7 +30,7 @@ import org.json.JSONObject
 /**
  * Created by codemagnus on 3/21/18.
  */
-class CheckOutFragment: Fragment() {
+class CheckOutFragment: Fragment(){
 
     val TAG2 = "#####################"
     internal lateinit var bitmap: Bitmap
@@ -58,7 +59,6 @@ class CheckOutFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         mActivity = context as MainActivity?
-        mActivity!!.setCustomToolbarTitle("CART")
         mActivity?.setToolbar(false)
         setTotalPrice()
 

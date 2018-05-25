@@ -36,7 +36,7 @@ class SizeSelectionFragment: Fragment() {
         var i_id:String? = null
         var n_name:String? = null
         var i_image:Int? = null
-        var category:String? = null
+        var category_id:Int? = 0
         var flavor:String? = null
         val TAG: String = SizeSelectionFragment::class.java.simpleName
         var instance: SizeSelectionFragment? = SizeSelectionFragment()
@@ -56,8 +56,8 @@ class SizeSelectionFragment: Fragment() {
 
         mActivity = context as MainActivity?
         mActivity?.setToolbar(true)
-        adapter = SizeAdapter(context, category,flavor, i_id)
-        mAdapter = SizeSelectAdapter(context, category, i_image, n_name, i_id)
+        adapter = SizeAdapter(context, category_id,flavor, i_id)
+        mAdapter = SizeSelectAdapter(context, category_id, i_image, n_name, i_id)
 
         btn_close.setOnClickListener {
             mActivity!!.onBackPressed()
@@ -65,16 +65,16 @@ class SizeSelectionFragment: Fragment() {
         Log.i(TAG2, items.toString())
 
 
-        if(category == "FLAVORED FRIES"){
+        if(category_id == 1){
             rv_sizeselect.layoutManager = GridLayoutManager(context,2)
             rv_sizeselect.adapter = adapter
         }
-        else if(category == "FANCY FRIES")
+        else if(category_id == 2)
         {
             rv_sizeselect.layoutManager = GridLayoutManager(context,1)
             rv_sizeselect.adapter = mAdapter
         }
-        else if(category == "DRINKS")
+        else if(category_id == 3)
         {
             rv_sizeselect.layoutManager = GridLayoutManager(context,1)
             rv_sizeselect.adapter = mAdapter

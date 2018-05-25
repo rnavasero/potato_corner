@@ -32,9 +32,10 @@ class SuccessFragment: Fragment() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        mActivity!!.setReceiptState(true)
         instance = this
-        mActivity?.setToolbar(false)
-        mActivity!!.setCustomToolbarTitle("RECEIPT")
+        //mActivity?.setToolbar(false)
+        //mActivity!!.setCustomToolbarTitle("RECEIPT")
     }
 
     override fun onDestroy() {

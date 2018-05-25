@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.size_content.view.*
 /**
  * Created by codemagnus on 3/20/18.
  */
-class SizeAdapter(val mContext:Context,var category:String?, var flavor:String?, var itemID:String?):RecyclerView.Adapter<SizeAdapter.ViewHolder>() {
+class SizeAdapter(val mContext:Context,var category:Int?, var flavor:String?, var itemID:String?):RecyclerView.Adapter<SizeAdapter.ViewHolder>() {
 
     private val TAG2 = "###"
     var mActivity: MainActivity? = null
