@@ -71,48 +71,57 @@ class SizeSelectAdapter(private val mContext:Context, var _category:Int?,var _im
             itemView.tv_size_sample.text = item.size
 
             itemView.ll_itemSize.setOnClickListener {
-
-                    when (item.size){
-
-                        "Small"->
-                        {
-                            item.id = "${itemID.toString()}1"
-                            item.category = ""
-                            item.name = _n!!
-                            item.qty = 1
-                            item.flavor = item.size
-                            item.imgUrl = _i!!
-                            item.price = 10.00
-                        }
-
-                        "Medium"->
-                        {
-                            item.id = "${itemID.toString()}2"
-                            item.category = ""
-                            item.name = _n!!
-                            item.qty = 1
-                            item.flavor = item.size
-                            item.imgUrl = _i!!
-                            item.price = 15.00
-                        }
-
-                        "Large"->
-                        {
-                            item.id = "${itemID.toString()}3"
-                            item.category = ""
-                            item.name = _n!!
-                            item.qty = 1
-                            item.flavor = item.size
-                            item.imgUrl = _i!!
-                            item.price = 20.00
-                        }
-
-                    }
-                mActivity!!.cart.add(Product(item.id, item.sku, item.name, item.category, item.size,item.flavor,item.price,item.imgUrl,item.qty))
-                mActivity!!.setCartCount(mActivity!!.productCount + 1)
-                mActivity!!.newFragment(CheckOutFragment(),CheckOutFragment.TAG)
-                mActivity!!.setCartState(true)
+                Toast.makeText(mContext, "Short Clicked!", Toast.LENGTH_SHORT).show()
             }
+
+            itemView.ll_itemSize.setOnLongClickListener {
+                Toast.makeText(mContext, "Long Clicked!", Toast.LENGTH_SHORT).show()
+                return@setOnLongClickListener true
+            }
+
+//            itemView.ll_itemSize.setOnClickListener {
+//
+//                    when (item.size){
+//
+//                        "Small"->
+//                        {
+//                            item.id = "${itemID.toString()}1"
+//                            item.category = ""
+//                            item.name = _n!!
+//                            item.qty = 1
+//                            item.flavor = item.size
+//                            item.imgUrl = _i!!
+//                            item.price = 10.00
+//                        }
+//
+//                        "Medium"->
+//                        {
+//                            item.id = "${itemID.toString()}2"
+//                            item.category = ""
+//                            item.name = _n!!
+//                            item.qty = 1
+//                            item.flavor = item.size
+//                            item.imgUrl = _i!!
+//                            item.price = 15.00
+//                        }
+//
+//                        "Large"->
+//                        {
+//                            item.id = "${itemID.toString()}3"
+//                            item.category = ""
+//                            item.name = _n!!
+//                            item.qty = 1
+//                            item.flavor = item.size
+//                            item.imgUrl = _i!!
+//                            item.price = 20.00
+//                        }
+//
+//                    }
+//                mActivity!!.cart.add(Product(item.id, item.sku, item.name, item.category, item.size,item.flavor,item.price,item.imgUrl,item.qty))
+//                mActivity!!.setCartCount(mActivity!!.productCount + 1)
+//                mActivity!!.newFragment(CheckOutFragment(),CheckOutFragment.TAG)
+//                mActivity!!.setCartState(true)
+//            }
 
         }
 
