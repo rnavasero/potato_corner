@@ -20,6 +20,9 @@ interface ProductDao {
     @Query("DELETE FROM productData")
     fun deleteAll()
 
+    @Query("SELECT * FROM productData")
+    fun countProduct(): Int
+
 //    @Query("SELECT DISTINCT flavor FROM productData WHERE category = 'FLAVORED FRIES'")
 //    fun loadFlavored():List<Product>
 //

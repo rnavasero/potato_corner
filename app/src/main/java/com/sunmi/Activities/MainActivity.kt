@@ -95,20 +95,10 @@ class MainActivity : AppCompatActivity() {
     var itemCheck:Boolean = false
     private var selectedId = R.id.navigation_home
 
-
-    private var isAidl: Boolean = false
-
-    fun isAidl(): Boolean {
-        return isAidl
-    }
-
-    fun setAidl(aidl: Boolean) {
-        isAidl = aidl
-    }
-
-
-
-
+    var productCategoryId = 0
+    var productName = ""
+    var productFlavor = ""
+    var productSize = ""
 
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
     @SuppressLint("InflateParams")
@@ -120,17 +110,22 @@ class MainActivity : AppCompatActivity() {
         setCustomToolbarTitle("ORDERS")
         setOrderState(true)
 
-        getAllProducts()
+        async(UI){
+            bg {
+                if(productDB?.productDao()?.countProduct() == 0){
+                    getAllProducts()
+                }
+                else{
+                    Toast.makeText(this@MainActivity,"Database not empty", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
 
-        getSavedCart()
         getProductByCategory1()
         getProductByCategory2()
         getProductByCategory3()
         //getProductSize()
 
-        getSavedCart()
-
-        isAidl = true
         AidlUtil.getInstance().connectPrinterService(this)
         //fn_permission()
 
@@ -524,7 +519,7 @@ class MainActivity : AppCompatActivity() {
         document.close()
     }
 
-    private fun getSavedCart(){
+    private fun  getSavedCart(){
         cart = ArrayList()
         var count = 0
         async(UI){

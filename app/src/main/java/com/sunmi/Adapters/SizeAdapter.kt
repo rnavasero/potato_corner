@@ -13,12 +13,13 @@ import com.squareup.picasso.Picasso
 import com.sunmi.Activities.MainActivity
 import com.sunmi.Models.Product
 import com.sunmi.printerhelper.R
+import kotlinx.android.synthetic.main.layout_size.view.*
 import kotlinx.android.synthetic.main.size_content.view.*
 
 /**
  * Created by codemagnus on 3/20/18.
  */
-class SizeAdapter(val mContext:Context,var category:Int?, var flavor:String?, var itemID:String?):RecyclerView.Adapter<SizeAdapter.ViewHolder>() {
+class SizeAdapter(val mContext:Context,var categoryId:Int?, var pName:String?, var imgUrl:Int?):RecyclerView.Adapter<SizeAdapter.ViewHolder>() {
 
     private val TAG2 = "###"
     var mActivity: MainActivity? = null
@@ -57,9 +58,9 @@ class SizeAdapter(val mContext:Context,var category:Int?, var flavor:String?, va
             return true
         }
 
-        private val c = category
-        private val f = flavor
-        private val id = itemID
+        private val c = categoryId
+        private val n = pName
+        private val i = imgUrl
 
 
 
@@ -71,16 +72,29 @@ class SizeAdapter(val mContext:Context,var category:Int?, var flavor:String?, va
 
             Picasso.with(mContext).load(item.imgUrl).resize(150,150   ).centerCrop().into(itemView.iv_item_content2)
 
+            if(item.qty >0){
+                itemView.cv_item2.item_count2.visibility = View.VISIBLE
+                itemView.cv_item2.item_count2.text = item.qty.toString()
+            }else
+                itemView.cv_item2.item_count2.visibility = View.GONE
+
             itemView.cv_item2.setOnClickListener {
-                Toast.makeText(mContext,"Short Clicked! ${position}", Toast.LENGTH_SHORT).show()
+                itemView.cv_item2.item_count2.visibility = View.VISIBLE
+                Toast.makeText(mContext, "Short Clicked!", Toast.LENGTH_SHORT).show()
                 item.qty += 1
+                itemView.cv_item2.item_count2.text = item.qty.toString()
                 mActivity!!.setCartCount(mActivity!!.productCount + 1)
                 updated(item)
             }
 
             itemView.cv_item2.setOnLongClickListener {
-                Toast.makeText(mContext,"Long Clicked!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(mContext, "Long Clicked!", Toast.LENGTH_SHORT).show()
                 item.qty -= 1
+                itemView.cv_item2.item_count2.text = item.qty.toString()
+                if(item.qty < 1){
+                    item.qty = 0
+                    itemView.cv_item2.item_count2.visibility = View.GONE
+                }
                 mActivity!!.setCartCount(mActivity!!.productCount - 1)
                 updated(item)
                 return@setOnLongClickListener true

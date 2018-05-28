@@ -1,6 +1,7 @@
 package com.example.codemagnus.newproject.Adapters
 
 import android.content.Context
+import android.opengl.Visibility
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -11,11 +12,12 @@ import com.sunmi.Activities.MainActivity
 import com.sunmi.Models.Product
 import com.sunmi.printerhelper.R
 import kotlinx.android.synthetic.main.layout_size.view.*
+import kotlinx.android.synthetic.main.size_content.view.*
 
 /**
  * Created by codemagnus on 3/22/18.
  */
-class SizeSelectAdapter(private val mContext:Context, var _category:Int?,var _image:Int?,var _name:String?, private var itemID:String?):RecyclerView.Adapter<SizeSelectAdapter.ViewHolder>() {
+class SizeSelectAdapter(private val mContext:Context, var _categoryId:Int?, var _pName:String?, var _imgUrl:Int?):RecyclerView.Adapter<SizeSelectAdapter.ViewHolder>() {
 
     private val TAG2 = "###"
 
@@ -59,23 +61,39 @@ class SizeSelectAdapter(private val mContext:Context, var _category:Int?,var _im
             return true
         }
 
-        private val _c = _category
-        private val _i = _image
-        private val _n = _name
-        private val _i_ID = itemID
+        private val _c = _categoryId
+        private val _i = _imgUrl
+        private val _n = _pName
 
 
         fun onBindItemHolder(position: Int){
 
             val item = itemList[position]
-            itemView.tv_size_sample.text = item.size
+            itemView.size_label.text = item.size
 
-            itemView.ll_itemSize.setOnClickListener {
+            if(item.qty >0){
+                itemView.cv_item1.item_count1.visibility = View.VISIBLE
+                itemView.cv_item1.item_count1.text = item.qty.toString()
+            }else
+                itemView.cv_item1.item_count1.visibility = View.GONE
+
+            itemView.cv_item1.setOnClickListener {
+                itemView.cv_item1.item_count1.visibility = View.VISIBLE
                 Toast.makeText(mContext, "Short Clicked!", Toast.LENGTH_SHORT).show()
+                item.qty += 1
+                mActivity!!.setCartCount(mActivity!!.productCount + 1)
+                updated(item)
             }
 
-            itemView.ll_itemSize.setOnLongClickListener {
+            itemView.cv_item1.setOnLongClickListener {
                 Toast.makeText(mContext, "Long Clicked!", Toast.LENGTH_SHORT).show()
+                item.qty -= 1
+                if(item.qty < 1){
+                    item.qty = 0
+                    itemView.cv_item1.item_count1.visibility = View.GONE
+                }
+                mActivity!!.setCartCount(mActivity!!.productCount - 1)
+                updated(item)
                 return@setOnLongClickListener true
             }
 
@@ -124,6 +142,33 @@ class SizeSelectAdapter(private val mContext:Context, var _category:Int?,var _im
 //            }
 
         }
+        private fun updated(product: Product){
+//            itemView.et_product_qty.text           = product.qty.toString()
+//            itemView.img_minus_product.visibility  = if (product.qty > 0) View.VISIBLE else View.GONE
+//            itemView.et_product_qty.visibility     = if (product.qty > 0) View.VISIBLE else View.GONE
+
+            Thread(Runnable {
+                if (product.qty > 0){
+                    if (!mActivity!!.cart.contains(product)){
+                        if (product.qty == 1){
+                            mActivity!!.cart.add(product)
+                        }else{
+                            (0 until mActivity!!.cart.size)
+                                    .filter { mActivity!!.cart[it].id == product.id }
+                                    .forEach {
+                                        mActivity!!.cart[it] = product
+                                    }
+                        }
+                    }
+                }else{
+                    if (mActivity!!.cart.contains(product)){
+                        mActivity!!.cart.remove(product)
+                    }
+                }
+            }).start()
+        }
 
     }
+
+
 }

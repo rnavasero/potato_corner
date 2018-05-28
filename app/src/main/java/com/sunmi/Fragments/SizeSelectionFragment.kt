@@ -30,14 +30,13 @@ class SizeSelectionFragment: Fragment() {
     private var mActivity: MainActivity? = null
     private var adapter: SizeAdapter? = null
     private var mAdapter: SizeSelectAdapter? = null
-    private var items: Product = Product()
+
 
     companion object {
-        var i_id:String? = null
+        var items:Product? = null
         var n_name:String? = null
         var i_image:Int? = null
         var category_id:Int? = 0
-        var flavor:String? = null
         val TAG: String = SizeSelectionFragment::class.java.simpleName
         var instance: SizeSelectionFragment? = SizeSelectionFragment()
         fun newInstance(): SizeSelectionFragment = SizeSelectionFragment()
@@ -56,8 +55,8 @@ class SizeSelectionFragment: Fragment() {
 
         mActivity = context as MainActivity?
         mActivity?.setToolbar(true)
-        adapter = SizeAdapter(context, category_id,flavor, i_id)
-        mAdapter = SizeSelectAdapter(context, category_id, i_image, n_name, i_id)
+        adapter = SizeAdapter(context, category_id, n_name, i_image)
+        mAdapter = SizeSelectAdapter(context, category_id,n_name,i_image)
 
         btn_close.setOnClickListener {
             mActivity!!.onBackPressed()

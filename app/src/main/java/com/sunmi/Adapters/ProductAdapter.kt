@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.RecyclerView
 import android.util.Log
+import android.util.Size
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -57,10 +58,10 @@ class ProductAdapter(val mContext:Context?, itemList:MutableList<Category>?):Rec
                     if (item.category_id != 1) {
                         if (item.category_id == 2){
                             SizeSelectionFragment.category_id = item.category_id
-                            //SizeSelectionFragment.i_id = item.id
                             SizeSelectionFragment.n_name = item.name
                             SizeSelectionFragment.i_image = item.imageUrl
                             SizeSelectionFragment.newInstance()
+                            SizeSelectionFragment.items = Product("","",item.name,"","","",0.00, item.imageUrl )
                             mActivity!!.addnewFragment(SizeSelectionFragment(),SizeSelectionFragment.TAG)
                             Log.i(TAG2,item.category_id.toString())
 
@@ -78,7 +79,8 @@ class ProductAdapter(val mContext:Context?, itemList:MutableList<Category>?):Rec
                     } else {
                         SizeSelectionFragment.category_id = item.category_id
                         //SizeSelectionFragment.i_id = item.id
-                        SizeSelectionFragment.flavor = item.name
+                        SizeSelectionFragment.n_name = item.name
+                        SizeSelectionFragment.i_image = item.imageUrl
                         mActivity!!.addnewFragment(SizeSelectionFragment(),SizeSelectionFragment.TAG)
                         Log.i(TAG2,item.category_id.toString())
 //                    val alert:android.support.v4.app.DialogFragment = SizeSelectionFragment()

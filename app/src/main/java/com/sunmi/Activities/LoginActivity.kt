@@ -84,7 +84,7 @@ class LoginActivity:AppCompatActivity() {
             override fun didUrlError(error: VolleyError) {
 
                 pDialog.dismiss()
-                Toast.makeText(this@LoginActivity,"Network Error", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@LoginActivity,error.toString(), Toast.LENGTH_SHORT).show()
 
             }
         })

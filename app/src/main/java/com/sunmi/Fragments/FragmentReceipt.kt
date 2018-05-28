@@ -13,8 +13,8 @@ import com.sunmi.Activities.MainActivity
 import com.sunmi.Adapters.ReceiptItemRecyclerAdapter
 import com.sunmi.printerhelper.R
 import com.sunmi.printerhelper.utils.AidlUtil
-import kotlinx.android.synthetic.main.category_content2.*
-import kotlinx.android.synthetic.main.category_content2.view.*
+import kotlinx.android.synthetic.main.layout_receipt.*
+import kotlinx.android.synthetic.main.layout_receipt.view.*
 
 /**
  * Created by codemagnus on 4/6/18.
@@ -39,7 +39,7 @@ open class FragmentReceipt: Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         instance = this
-        return layoutInflater.inflate(R.layout.category_content2, null)
+        return layoutInflater.inflate(R.layout.layout_receipt, null)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
